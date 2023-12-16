@@ -27,6 +27,6 @@ class Auth extends AuthConfig
      *
      * @var string
      */
-    public $viewLayout = 'app\View\Auth\login';
+    public $viewLayout = 'app\View\Auth';
 
 }
