@@ -29,4 +29,16 @@ class Auth extends AuthConfig
      */
     public $viewLayout = 'app\View\Auth';
 
+    /**
+     * --------------------------------------------------------------------
+     * Views used by Auth Controllers
+     * --------------------------------------------------------------------
+     *
+     * @var array
+     */
+    public $views = [
+        'login'           => 'app\View\Auth\login',
+        'register'        => 'app\View\Auth\register',
+    ];
+
 }

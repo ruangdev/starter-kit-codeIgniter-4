@@ -2,48 +2,26 @@
 
 use CodeIgniter\Router\RouteCollection;
 use Myth\Auth\Config\Auth as AuthConfig;
+
 /**
  * @var RouteCollection $routes
  */
+$routes->group('cms/v1',function($routes) {
+    /**
+     * Route Login & Logout
+     */
+    $routes->get('login', 'Admin\AuthController::login', ['as' => 'login']);
+    $routes->post('login', 'Admin\AuthController::attemptLogin');
+    $routes->get('logout', 'Admin\AuthController::logout');
 
-$routes->get('/login', 'Auth\LoginController::login', ['as' => 'login']);
-// $routes->post('/login', 'loginController::attemptLogin');
-// $routes->get('/logout', 'loginController::logout');
-
-$routes->get('/register', 'Auth\loginController::register', ['as' => 'register']);
-// $routes->post('register', 'loginController::attemptRegister');
-
-// $routes->get('activate-account', 'loginController::activateAccount', ['as' => 'activate-account']);
-// $routes->get('resend-activate-account', 'loginController::resendActivateAccount', ['as' => 'resend-activate-account']);
-
-// $routes->get('forgot', 'loginController::forgotPassword', ['as' => 'forgot']);
-// $routes->post('forgot', 'loginController::attemptForgot');
-// $routes->get('reset-password', 'loginController::resetPassword', ['as' => 'reset-password']);
-// $routes->post('reset-password', 'loginController::attemptReset');
-
-// $routes->group('', ['namespace' => 'App\Controllers'], static function ($routes) {
-    // $config         = config(AuthConfig::class);
-    // $reservedRoutes = $config->reservedRoutes;
-
-    // Login/out
-    // $routes->get('/login', 'Auth\loginController::login', ['as' => 'login']);
-    // $routes->post('/login', 'loginController::attemptLogin');
-    // $routes->get('/logout', 'loginController::logout');
-
-    // Registration
-    // $routes->get('register', 'loginController::register', ['as' => 'register']);
-    // $routes->post('register', 'loginController::attemptRegister');
-
-    // Activation
-    // $routes->get('activate-account', 'loginController::activateAccount', ['as' => 'activate-account']);
-    // $routes->get('resend-activate-account', 'loginController::resendActivateAccount', ['as' => 'resend-activate-account']);
-
-    // Forgot/Resets
-    // $routes->get('forgot', 'loginController::forgotPassword', ['as' => 'forgot']);
-    // $routes->post('forgot', 'loginController::attemptForgot');
-    // $routes->get('reset-password', 'loginController::resetPassword', ['as' => 'reset-password']);
-    // $routes->post('reset-password', 'loginController::attemptReset');
-// });
+    /**
+     * Route Register
+     */
+    $routes->get('register', 'Admin\AuthController::register', ['as' => 'register']);
+    $routes->post('register', 'Admin\AuthController::attemptRegister');
+});
 
 $routes->get('/', 'Home::index', ['filter' => 'login']);
-$routes->get('/home', 'Home::index', ['filter' => 'login']);
+$routes->group('/', ['filter' => 'login'], function($routes) {
+    $routes->get('/home', 'Home::index');
+});
