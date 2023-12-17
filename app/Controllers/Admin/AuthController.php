@@ -36,7 +36,7 @@ class AuthController extends BaseController
             unset($_SESSION['redirect_url']);
                 return redirect()->to($redirectURL);
         }
-            $_SESSION['redirect_url'] = session('redirect_url') ?? previous_url() ?? site_url('/');
+            $_SESSION['redirect_url'] = session('redirect_url') ?? url_to('admin.dashboard') ?? site_url('/');
                 return view('Auth/login', ['config' => $this->config]);
     }
 
