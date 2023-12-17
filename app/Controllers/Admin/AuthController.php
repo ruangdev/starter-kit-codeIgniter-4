@@ -33,10 +33,9 @@ class AuthController extends BaseController
 
     public function login()
     {
-        $code = (string) new Code;
-        $_SESSION['code'] = $code;
-
-        $codecap = new Image($code);
+        $code               = (string) new Code;
+        $_SESSION['code']   = $code;
+        $codecapcha         = new Image($code);
 
         if ($this->auth->check()) {
             $redirectURL = session('redirect_url') ?? site_url('/');
@@ -44,14 +43,14 @@ class AuthController extends BaseController
                 return redirect()->to($redirectURL);
         }
             $_SESSION['redirect_url'] = session('redirect_url') ?? url_to('admin.dashboard') ?? site_url('/');
-                return view('Auth/login', ['config' => $this->config, 'codecap' => $codecap]);
+                return view('Auth/login', ['config' => $this->config, 'codecapcha' => $codecapcha]);
     }
 
     public function attemptLogin()
     {
 
-        $result = $this->request->getPost('capcha');
-        $session = $_SESSION['code'];
+        $result     = $this->request->getPost('capcha');
+        $session    = $_SESSION['code'];
 
         if ($result !== null && $session !== null) {
             if (strtolower($result) == strtolower($session)) {         

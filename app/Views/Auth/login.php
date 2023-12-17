@@ -47,7 +47,7 @@
                         </div>
 
                         <form id="formAuthentication" class="mb-3" method="POST" action="<?= url_to('login') ?>">
-                        <?= csrf_field() ?>
+                            <?= csrf_field() ?>
 
                             <div class="mb-3">
                                 <label for="name" class="form-label">Username</label>
@@ -68,12 +68,17 @@
                             </div>
 
                             <div class="mb-2">
-                                <img src="<?= $codecap; ?>" />
+                                <div class="alert alert-success">
+                                    <img id="captchaImage" src="<?= $codecapcha; ?>" />
+                                    <button type="button" class="btn btn-dark reload" id="reload">
+                                        <i class="fas fa-redo-alt"></i>
+                                    </button>
+                                </div>
                             </div>
 
                             <div class="mb-2">
                                 <label for="name" class="form-label">Capcha</label>
-                                <input type="text" class="form-control" id="capcha" name="capcha" placeholder="Enter Capcha..." utocomplete="off"/>
+                                <input type="text" class="form-control" id="capcha" name="capcha" placeholder="Enter Capcha..." utocomplete="off" />
                             </div>
 
                             <div class="mb-1">
@@ -105,6 +110,15 @@
     <script src="<?= base_url('assets/auth/js/menu.js') ?>"></script>
     <script src="<?= base_url('assets/auth/js/password.js') ?>"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    <script>
+        function reloadPage() {
+            location.reload(true);
+        }
+        document.getElementById('reload').addEventListener('click', function() {
+            reloadPage();
+        });
+    </script>
 </body>
 
 </html>
