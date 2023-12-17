@@ -49,12 +49,12 @@
                         <form id="formAuthentication" class="mb-3" method="POST" action="<?= url_to('login') ?>">
                             <?= csrf_field() ?>
 
-                            <div class="mb-3">
+                            <div class="mb-2">
                                 <label for="name" class="form-label">Username</label>
                                 <input type="text" class="form-control" id="name" name="login" placeholder="Enter your username" utocomplete="off" required autofocus />
                             </div>
 
-                            <div class="mb-3 form-password-toggle">
+                            <div class="mb-2 form-password-toggle">
                                 <label class="form-label" for="password">Password</label>
                                 <div class="input-group input-group-merge">
                                     <input id="password" type="password" class="form-control" name="password" required autocomplete="off" placeholder="Password" aria-describedby="password">
@@ -67,7 +67,7 @@
                                 </div>
                             </div>
 
-                            <div class="mb-2">
+                            <div class="mb-1">
                                 <div class="alert alert-success">
                                     <img id="captchaImage" src="<?= $codecapcha; ?>" />
                                     <button type="button" class="btn btn-dark reload" id="reload">
@@ -76,7 +76,7 @@
                                 </div>
                             </div>
 
-                            <div class="mb-2">
+                            <div class="mb-1">
                                 <label for="name" class="form-label">Capcha</label>
                                 <input type="text" class="form-control" id="capcha" name="capcha" placeholder="Enter Capcha..." utocomplete="off" />
                             </div>
@@ -87,7 +87,7 @@
                                 <a style="font-weight:600" href="<?= url_to('register') ?>">Register here.</a>
                             </div>
 
-                            <div class="mb-3">
+                            <div class="mb-1">
                                 <label style="color:#a0a9b4">Back</label>
                                 <a style="font-weight:600" href="<?= url_to('home.site') ?>">Website.</a>
                             </div>
