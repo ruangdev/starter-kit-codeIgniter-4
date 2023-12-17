@@ -15,32 +15,32 @@
 
 <body>
     <div id="app">
-        
+
         <div id="sidebar" class="active">
             <div class="sidebar-wrapper active">
 
                 <!-- Header -->
-                    <?= $this->include('Admin/layout/header') ?>
+                <?= $this->include('Admin/layout/header') ?>
                 <!-- End Header -->
 
                 <!-- Menu -->
-                    <?= $this->include('Admin/layout/menu') ?>
+                <?= $this->include('Admin/layout/menu') ?>
                 <!-- End Menu -->
-                    
-                </div>
+
             </div>
-            
-            <div id="main" class='layout-navbar'>
-                
-                <!-- Navbar -->
-                    <?= $this->include('Admin/layout/navbar') ?>
-                <!-- End Navbar -->
-                
+        </div>
+
+        <div id="main" class='layout-navbar'>
+
+            <!-- Navbar -->
+            <?= $this->include('Admin/layout/navbar') ?>
+            <!-- End Navbar -->
+
             <div id="main-content">
                 <div class="page-heading">
-                <!-- Contain -->
+                    <!-- Contain -->
                     <?= $this->renderSection('content') ?>
-                <!-- End Contain -->
+                    <!-- End Contain -->
                 </div>
             </div>
 

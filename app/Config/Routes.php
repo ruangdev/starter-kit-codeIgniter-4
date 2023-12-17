@@ -12,7 +12,7 @@ $routes->group('cms/v1',function($routes) {
      */
     $routes->get('login', 'Admin\AuthController::login', ['as' => 'login']);
     $routes->post('login', 'Admin\AuthController::attemptLogin');
-    $routes->get('logout', 'Admin\AuthController::logout');
+    $routes->get('logout', 'Admin\AuthController::logout', ['as' => 'logout']);
 
     /**
      * Route Register
@@ -21,7 +21,14 @@ $routes->group('cms/v1',function($routes) {
     $routes->post('register', 'Admin\AuthController::attemptRegister');
 });
 
-$routes->get('/', 'Home::index');
+/**
+ * Route Home Website
+ */
+$routes->get('/', 'Home::index',['as' => 'home.site', 'filter' => 'login']);
+
+/**
+ * Route Admin
+ */
 $routes->group('/cms/v1', ['filter' => 'login'], function($routes) {
     $routes->get('dashboard', 'Admin\DashboardController::index',['as' => 'admin.dashboard']);
 });

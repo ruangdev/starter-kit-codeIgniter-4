@@ -44,7 +44,7 @@
                             </div>
                             <div class="user-img d-flex align-items-center">
                                 <div class="avatar avatar-md">
-                                    <img src="">
+                                    <img src="<?= base_url('assets/cms/image/avatar.png') ?>">
                                 </div>
                             </div>
                         </div>
@@ -69,13 +69,14 @@
                         </li>
 
                         <li class="dropdown-item rounded fs-5">
-                            <a class="dropdown-item badge bg-danger" href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <a class="dropdown-item badge bg-danger" href="<?= url_to('logout') ?>" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="fas fa-sign-out-alt"></i>
                                 Logout
                             </a>
-                            <form id="logout-form" action="" method="POST" class="d-none">
+                            <form id="logout-form" action="<?= url_to('logout') ?>" method="GET" class="d-none">
                             </form>
                         </li>
+
                     </ul>
                 </div>
             </div>

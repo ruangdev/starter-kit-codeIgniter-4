@@ -69,10 +69,15 @@
                                 </div>
                             </div>
 
-                            <div class="mb-3">
+                            <div class="mb-1">
                                 <label style="color:#a0a9b4">Don't have account yet?</label>
                                 <span style="width:5px;">&nbsp;</span>
                                 <a style="font-weight:600" href="<?= url_to('register') ?>">Register here.</a>
+                            </div>
+
+                            <div class="mb-3">
+                                <label style="color:#a0a9b4">Back</label>
+                                <a style="font-weight:600" href="<?= url_to('home.site') ?>">Website.</a>
                             </div>
 
                             <div class="mb-3">
