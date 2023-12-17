@@ -55,7 +55,6 @@
                             </div>
 
                             <div class="mb-3 form-password-toggle">
-
                                 <label class="form-label" for="password">Password</label>
                                 <div class="input-group input-group-merge">
                                     <input id="password" type="password" class="form-control" name="password" required autocomplete="off" placeholder="Password" aria-describedby="password">
@@ -65,8 +64,16 @@
                                             <span>Show</span>
                                         </div>
                                     </span>
-
                                 </div>
+                            </div>
+
+                            <div class="mb-2">
+                                <img src="<?= $codecap; ?>" />
+                            </div>
+
+                            <div class="mb-2">
+                                <label for="name" class="form-label">Capcha</label>
+                                <input type="text" class="form-control" id="capcha" name="capcha" placeholder="Enter Capcha..." utocomplete="off"/>
                             </div>
 
                             <div class="mb-1">

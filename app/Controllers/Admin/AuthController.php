@@ -4,6 +4,8 @@ namespace App\Controllers\Admin;
 
 
 use App\Models\UserModel;
+use Mobicms\Captcha\Code;
+use Mobicms\Captcha\Image;
 use Myth\Auth\Entities\User;
 use App\Controllers\BaseController;
 
@@ -31,49 +33,64 @@ class AuthController extends BaseController
 
     public function login()
     {
+        $code = (string) new Code;
+        $_SESSION['code'] = $code;
+
+        $codecap = new Image($code);
+
         if ($this->auth->check()) {
             $redirectURL = session('redirect_url') ?? site_url('/');
             unset($_SESSION['redirect_url']);
                 return redirect()->to($redirectURL);
         }
             $_SESSION['redirect_url'] = session('redirect_url') ?? url_to('admin.dashboard') ?? site_url('/');
-                return view('Auth/login', ['config' => $this->config]);
+                return view('Auth/login', ['config' => $this->config, 'codecap' => $codecap]);
     }
 
     public function attemptLogin()
     {
-        $rules = [
-            'login'    => 'required',
-            'password' => 'required',
-        ];
-        if ($this->config->validFields === ['email']) {
-            $rules['login'] .= '|valid_email';
+
+        $result = $this->request->getPost('capcha');
+        $session = $_SESSION['code'];
+
+        if ($result !== null && $session !== null) {
+            if (strtolower($result) == strtolower($session)) {         
+                $rules = [
+                    'login'    => 'required',
+                    'password' => 'required',
+                ];
+                if ($this->config->validFields === ['email']) {
+                    $rules['login'] .= '|valid_email';
+                }
+
+                if (! $this->validate($rules)) {
+                    return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+                }
+
+                $login    = $this->request->getPost('login');
+                $password = $this->request->getPost('password');
+                $remember = (bool) $this->request->getPost('remember');
+
+                // Determine credential type
+                $type = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+
+                // Try to log them in...
+                if (! $this->auth->attempt([$type => $login, 'password' => $password], $remember)) {
+                    return redirect()->back()->withInput()->with('error', $this->auth->error() ?? lang('Auth.badAttempt'));
+                }
+
+                // Is the user being forced to reset their password?
+                if ($this->auth->user()->force_pass_reset === true) {
+                    return redirect()->to(route_to('reset-password') . '?token=' . $this->auth->user()->reset_hash)->withCookies();
+                }
+
+                $redirectURL = session('redirect_url') ?? url_to('login');
+                unset($_SESSION['redirect_url']);
+                    return redirect()->to($redirectURL)->withCookies()->with('message', lang('Auth.loginSuccess'));
+            } else {
+                return redirect()->to(url_to('login'));
+            }
         }
-
-        if (! $this->validate($rules)) {
-            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
-        }
-
-        $login    = $this->request->getPost('login');
-        $password = $this->request->getPost('password');
-        $remember = (bool) $this->request->getPost('remember');
-
-        // Determine credential type
-        $type = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-
-        // Try to log them in...
-        if (! $this->auth->attempt([$type => $login, 'password' => $password], $remember)) {
-            return redirect()->back()->withInput()->with('error', $this->auth->error() ?? lang('Auth.badAttempt'));
-        }
-
-        // Is the user being forced to reset their password?
-        if ($this->auth->user()->force_pass_reset === true) {
-            return redirect()->to(route_to('reset-password') . '?token=' . $this->auth->user()->reset_hash)->withCookies();
-        }
-
-        $redirectURL = session('redirect_url') ?? url_to('login');
-        unset($_SESSION['redirect_url']);
-            return redirect()->to($redirectURL)->withCookies()->with('message', lang('Auth.loginSuccess'));
     }
 
     /**
