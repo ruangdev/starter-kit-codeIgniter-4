@@ -3,18 +3,21 @@
 namespace App\Repository\User;
 
 use Config\Database;
+use App\Helpers\UUID;
 use App\Models\Users;
 use Myth\Auth\Password;
 use App\Models\UserProfile;
+use Illuminate\Support\Str;
 use App\Repository\User\UserDesign;
 
 class UserResponse implements UserDesign {
 
     public function __construct()
     {
-        $this->db       = Database::connect();
-        $this->users    = new Users;
+        $this->db        = Database::connect();
+        $this->users     = new Users;
         $this->profile   = new UserProfile();
+        $this->uuid      = UUID::create();
     }
 
     public function datatable()
@@ -32,6 +35,7 @@ class UserResponse implements UserDesign {
             'active'         => true
         ]);
             $this->profile->create([
+                'id'                => $this->uuid,
                 'user_id'           => $result->id,
                 'fullName'          => 'Budi Kuncoro',
                 'imageName'         => 'imageBudi',

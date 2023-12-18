@@ -28,6 +28,8 @@ class UserController extends BaseController
                                                     ';
                                         })->toJson(true);
         }
+        $param = "Data";
+        $this->UserResponse->create($param);
             return view('Admin/User/index');
     }
 

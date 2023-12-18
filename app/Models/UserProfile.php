@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Ramsey\Uuid\Uuid;
 use Illuminate\Database\Eloquent\Model;
 
 class UserProfile extends Model
@@ -10,6 +9,7 @@ class UserProfile extends Model
     protected $table        = 'user_profile';
     protected $keyType      = 'string';
     public $incrementing    = false;
+    protected $primaryKey   = 'id';
 
     /**
      * The attributes that are mass assignable.
@@ -26,20 +26,4 @@ class UserProfile extends Model
         'numberPhone',
         'TeleID'
     ];
-
-    /**
-     * Generator UUID4
-     */
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            try {
-                $model->id = str_replace('-', '', Uuid::uuid4()->toString());
-            } catch (\Exception $e) {
-                abort(500);
-            }
-        });
-    }
 }
