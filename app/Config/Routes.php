@@ -31,4 +31,9 @@ $routes->get('/', 'Home::index',['as' => 'home.site', 'filter' => 'login']);
  */
 $routes->group('/cms/v1', ['filter' => 'login'], function($routes) {
     $routes->get('dashboard', 'Admin\DashboardController::index',['as' => 'admin.dashboard']);
+
+    /**
+     * Route User Management
+     */
+    $routes->get('list-admin', 'Admin\UserController::index',['as' => 'admin.user']);
 });

@@ -35,7 +35,7 @@
             </a>
             <ul class="submenu ">
                 <li class="submenu-item ">
-                    <a href="">
+                    <a href="<?= route_to('admin.user')?>">
                         Data Admin
                     </a>
                 </li>
