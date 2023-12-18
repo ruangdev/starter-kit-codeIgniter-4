@@ -33,7 +33,6 @@
                         <th class="text-left" width="100px">Username</th>
                         <th class="text-left" width="100px">Full Name</th>
                         <th class="text-left" width="100px">Email</th>
-                        <th class="text-left" width="260px">Role</th>
                         <th class="text-left" width="100px">Numberphone</th>
                         <th class="text-left" width="90px">Telegram ID</th>
                     </tr>
@@ -53,7 +52,14 @@
     $('#tableAdmin').DataTable({
         processing: true,
         serverSide: true,
-        ajax: '/cms/v1/list-admin'
+        ajax: '/cms/v1/list-admin',
+        columns: [
+            {data: 'username'},
+            {data: 'fullName'},
+            {data: 'email'},
+            {data: 'numberPhone'},
+            {data: 'TeleID'},
+        ]
     });
 });
 </script>

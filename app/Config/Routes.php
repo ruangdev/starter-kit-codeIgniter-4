@@ -36,5 +36,4 @@ $routes->group('/cms/v1', ['filter' => 'login'], function($routes) {
      * Route User Management
      */
     $routes->get('list-admin', 'Admin\UserController::index',['as' => 'admin.user']);
-    $routes->get('list-admin-ajax', 'Admin\UserController::jsondatatable',['as' => 'admin.user.ajax']);
 });
