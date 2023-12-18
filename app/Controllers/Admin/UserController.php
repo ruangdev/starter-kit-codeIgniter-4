@@ -41,4 +41,19 @@ class UserController extends BaseController
         $param = "Data";
         $this->UserResponse->create($param);
     }
+
+    public function edit()
+    {
+        # code...
+    }
+
+    public function update()
+    {
+        # code...
+    }
+
+    public function inactive()
+    {
+        # code...
+    }
 }
