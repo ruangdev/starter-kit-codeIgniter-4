@@ -8,12 +8,19 @@
 
 <div class="page-title">
     <div class="row">
-        <div class="col-12 col-md-6 order-md-1 order-last">
+        <div class="col-12 col-md-4 order-md-1 order-last">
+            <a href="" class="btn btn-primary">
+                Create
+            </a>
+        </div>
+
+        <div class="col-12 col-md-4 order-md-1 order-first">
             <h4 class="card-title">
                 List Data User
             </h4>
         </div>
-        <div class="col-12 col-md-6 order-md-2 order-first">
+
+        <div class="col-12 col-md-4 order-md-2 order-last">
             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="">Authorization</a></li>
@@ -36,6 +43,7 @@
                         <th class="text-left" width="100px">Email</th>
                         <th class="text-left" width="100px">Numberphone</th>
                         <th class="text-left" width="90px">Telegram ID</th>
+                        <th class="text-left" width="50px">Action</th>
                     </tr>
                 </thead>
             </table>
@@ -50,20 +58,36 @@
 
 <script>
     $(document).ready(function() {
-    $('#tableAdmin').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: '/cms/v1/list-admin',
-        order: [],
-        columns: [
-            {data: 'no', orderable: false},
-            {data: 'username'},
-            {data: 'fullName'},
-            {data: 'email'},
-            {data: 'numberPhone'},
-            {data: 'TeleID'},
-        ]
+        $('#tableAdmin').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '/cms/v1/list-admin',
+            order: [],
+            columns: [{
+                    data: 'no',
+                    orderable: false
+                },
+                {
+                    data: 'username'
+                },
+                {
+                    data: 'fullName'
+                },
+                {
+                    data: 'email'
+                },
+                {
+                    data: 'numberPhone'
+                },
+                {
+                    data: 'TeleID'
+                },
+                {
+                    data: 'action',
+                    orderable: false
+                },
+            ]
+        });
     });
-});
 </script>
 <?= $this->endSection() ?>
