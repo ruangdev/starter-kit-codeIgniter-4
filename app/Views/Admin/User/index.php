@@ -30,6 +30,7 @@
             <table class="table table-hover table-striped" id="tableAdmin">
                 <thead class="table-dark">
                     <tr>
+                        <th class="text-left" width="50px">No.</th>
                         <th class="text-left" width="100px">Username</th>
                         <th class="text-left" width="100px">Full Name</th>
                         <th class="text-left" width="100px">Email</th>
@@ -53,7 +54,9 @@
         processing: true,
         serverSide: true,
         ajax: '/cms/v1/list-admin',
+        order: [],
         columns: [
+            {data: 'no', orderable: false},
             {data: 'username'},
             {data: 'fullName'},
             {data: 'email'},

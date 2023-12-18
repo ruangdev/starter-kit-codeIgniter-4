@@ -22,7 +22,7 @@ class UserController extends BaseController
             $result = $this->db->table('user_profile')
                                 ->join('users', 'users.id = user_profile.user_id')
                                 ->select('users.id, users.email, users.username, user_profile.fullName, user_profile.numberPhone, user_profile.TeleID');
-            return DataTable::of($result)->addNumbering()->toJson(true);
+            return DataTable::of($result)->addNumbering('no')->toJson(true);
         }
             return view('Admin/User/index');
     }
