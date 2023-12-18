@@ -36,25 +36,46 @@
         <div class="authentication-wrapper authentication-basic container-p-y">
             <div class="authentication-inner">
                 <div class="card">
-                    <div class="d-flex justify-content-center mt-3">
+                    <div class="d-flex justify-content-center mt-1">
                         <h4>
                             System Auth CMS
                         </h4>
                     </div>
                     <div class="card-body shadow rounded">
+
+                        <?php if (session()->has('message')) : ?>
+                            <div class="alert alert-success">
+                                <?= session('message') ?>
+                            </div>
+                        <?php endif ?>
+
+                        <?php if (session()->has('error')) : ?>
+                            <div class="alert alert-danger">
+                                <?= session('error') ?>
+                            </div>
+                        <?php endif ?>
+
+                        <?php if (session()->has('errors')) : ?>
+                            <ul class="alert alert-danger">
+                                <?php foreach (session('errors') as $error) : ?>
+                                    <li><?= $error ?></li>
+                                <?php endforeach ?>
+                            </ul>
+                        <?php endif ?>
+
                         <div class="d-flex justify-content-center">
                             <img class="rounded-circle app-brand-size-logo" src="<?= base_url('assets/auth/image/logo.png') ?>">
                         </div>
 
-                        <form id="formAuthentication" class="mb-3" method="POST" action="<?= url_to('login') ?>">
+                        <form id="formAuthentication" method="POST" action="<?= url_to('login') ?>">
                             <?= csrf_field() ?>
 
-                            <div class="mb-2">
+                            <div class="mb-1">
                                 <label for="name" class="form-label">Username</label>
                                 <input type="text" class="form-control" id="name" name="login" placeholder="Enter your username" utocomplete="off" required autofocus />
                             </div>
 
-                            <div class="mb-2 form-password-toggle">
+                            <div class="mb-1 form-password-toggle">
                                 <label class="form-label" for="password">Password</label>
                                 <div class="input-group input-group-merge">
                                     <input id="password" type="password" class="form-control" name="password" required autocomplete="off" placeholder="Password" aria-describedby="password">
@@ -67,13 +88,11 @@
                                 </div>
                             </div>
 
-                            <div class="mb-1">
-                                <div class="alert alert-success">
-                                    <img id="captchaImage" src="<?= $codecapcha; ?>" />
-                                    <button type="button" class="btn btn-dark reload" id="reload">
-                                        <i class="fas fa-redo-alt"></i>
-                                    </button>
-                                </div>
+                            <div class="alert alert-success">
+                                <img id="captchaImage" src="<?= $codecapcha; ?>" />
+                                <button type="button" class="btn btn-dark reload" id="reload">
+                                    <i class="fas fa-redo-alt"></i>
+                                </button>
                             </div>
 
                             <div class="mb-1">

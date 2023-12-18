@@ -84,7 +84,7 @@ class AuthController extends BaseController
                 unset($_SESSION['redirect_url']);
                     return redirect()->to($redirectURL)->withCookies()->with('message', lang('Auth.loginSuccess'));
             } else {
-                return redirect()->to(url_to('login'));
+                return redirect()->to(url_to('login'))->withInput()->with('error', 'Captcha code is incorrect.');
             }
         }
     }
