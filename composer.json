@@ -12,6 +12,7 @@
     "require": {
         "php": "^7.4 || ^8.0",
         "codeigniter4/framework": "^4.0",
+        "hermawan/codeigniter4-datatables": "^0.6.1",
         "mobicms/captcha": "^4.0",
         "myth/auth": "^1.2",
         "nabcellent/codeigniter4-eloquent": "^1.1",

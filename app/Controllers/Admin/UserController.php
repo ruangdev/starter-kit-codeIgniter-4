@@ -2,22 +2,34 @@
 
 namespace App\Controllers\Admin;
 
+use Config\Database;
 use App\Models\Users;
 use Myth\Auth\Password;
 use App\Models\UserProfile;
+use \Hermawan\DataTables\DataTable;
 use App\Controllers\BaseController;
 
 class UserController extends BaseController
 {
+    public function __construct()
+    {
+        $this->db = Database::connect();
+    }
+
     public function index()
     {
-        // $result = Users::join('user_profile', 'users.id', '=', 'user_profile.user_id')
-        // ->select('users.id', 'users.email', 'users.username', 'user_profile.fullName', 'user_profile.numberPhone', 'user_profile.TeleID')
-        // ->get();
-		// return $this->response->setJSON([
-		// 	'data'   => $result
-		// ]);
-        return view('Admin/User/index');
+        if($this->request->isAJAX()) {
+            $result = $this->db->table('user_profile')
+                                ->join('users', 'users.id = user_profile.user_id')
+                                ->select('users.id, users.email, users.username, user_profile.fullName, user_profile.numberPhone, user_profile.TeleID');
+            return DataTable::of($result)->toJson();
+        }
+            return view('Admin/User/index');
+    }
+
+    public function jsondatatable()
+    {
+
     }
 
     public function store()
