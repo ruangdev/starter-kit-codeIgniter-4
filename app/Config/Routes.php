@@ -35,5 +35,6 @@ $routes->group('/cms/v1', ['filter' => 'login'], function($routes) {
     /**
      * Route User Management
      */
-    $routes->get('list-admin', 'Admin\UserController::index',['as' => 'admin.user']);
+    $routes->get('list-admin', 'Admin\UserController::index',['as' => 'admin.user.list']);
+    $routes->get('create-admin','Admin\UserController::create',['as' => 'admin.user.create']);
 });

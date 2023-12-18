@@ -34,6 +34,11 @@ class UserController extends BaseController
             return view('Admin/User/index');
     }
 
+    public function create()
+    {
+        return view('Admin/User/create');
+    }
+
     public function store()
     {
         $result = Users::create([
