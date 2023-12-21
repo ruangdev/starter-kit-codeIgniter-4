@@ -57,42 +57,10 @@
 <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.23/datatables.min.js"></script>
-
-<script>
-    $(document).ready(function() {
-        $('#tableAdmin').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: '/cms/v1/list-admin',
-            order: [],
-            columns: [{
-                    data: 'no',
-                    orderable: false
-                },
-                {
-                    data: 'username'
-                },
-                {
-                    data: 'fullName'
-                },
-                {
-                    data: 'email'
-                },
-                {
-                    data: 'numberPhone'
-                },
-                {
-                    data: 'TeleID'
-                },
-                {
-                    data: 'action',
-                    orderable: false
-                },
-            ]
-        });
-    });
-</script>
-<?= $this->endSection() ?>
+<?= 
+$this->include('Admin/User/datatable/index');
+$this->endSection();
+?>
 
 <?= $this->section('jscustom') ?>
 <script src="<?= base_url('assets/cms/js/toastify.js') ?>"></script>
