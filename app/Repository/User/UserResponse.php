@@ -56,6 +56,22 @@ class UserResponse implements UserDesign {
 
     public function update($param, $id)
     {
-        dd($param);
+        $data = [
+            'username'       => $param['name'],
+            'email'          => $param['email'],
+            'active'         => true
+        ];
+
+        if ($param['password']) {
+            $data['password_hash'] = Password::hash($param['password']);
+        }
+            $result = $this->users->whereId($id)
+                                  ->update($data);
+            $this->profile->whereUserId($id)
+                        ->update([
+                            'fullName'      => $param['fullName'],
+                            'numberPhone'   => $param['Numberphone'],
+                            'TeleID'        => $param['telegramid']
+                        ]);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use Config\Services;
+use Config\Database;
 use App\Helpers\UUID;
 use App\Models\Users;
 use Myth\Auth\Password;
@@ -16,6 +17,7 @@ class UserController extends BaseController
 {
     public function __construct()
     {
+        $this->db           = Database::connect();
         $this->UserResponse = New UserResponse();
     }
 
@@ -78,9 +80,31 @@ class UserController extends BaseController
             return view('Admin/User/edit',compact('result'));
     }
 
-    public function update()
+    public function update($id)
     {
-        # code...
+        $this->db->transBegin();
+        try {
+            $param = $this->request->getRawInput();
+            $this->UserResponse->update($param, $id);
+                $notification = [
+                    'message'     => 'Successfully updated Admin.',
+                    'alert-type'  => 'success',
+                    'gravity'     => 'bottom',
+                    'position'    => 'right'
+                ]; 
+                    return redirect()->to(route_to('admin.user.list'))->with('message', $notification);
+        } catch (\Throwable $th) {
+            $this->db->transRollback();
+            $notification = [
+                'message'     => 'Failed to updated Admin.',
+                'alert-type'  => 'danger',
+                'gravity'     => 'bottom',
+                'position'    => 'right'
+            ];   
+                return redirect()->to(route_to('admin.user.list'))->with('message', $notification);
+        } finally {
+            $this->db->transCommit();
+        }
     }
 
     public function inactive()

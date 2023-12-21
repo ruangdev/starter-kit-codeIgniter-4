@@ -30,7 +30,9 @@
 <section class="section">
     <div class="card">
         <div class="card-body">
-        <form class="form" action="" method="POST">
+        <form class="form" action="<?= route_to('admin.user.update',$result->id) ?>" method="POST">
+            <?= csrf_field() ?>
+            <input type="hidden" name="_method" value="PUT">
 
                     <div class="row">
 
@@ -103,5 +105,5 @@
 </section>
 <?= $this->endSection() ?>
 <?= $this->section('jscustom') ?>
-
+<script src="<?= base_url('assets/cms/js/showpassword.js') ?>"></script>
 <?= $this->endSection() ?>
