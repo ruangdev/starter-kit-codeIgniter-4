@@ -2,6 +2,8 @@
 
 <?= $this->section('csscustom') ?>
 <link href="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.8/datatables.css" rel="stylesheet">
+<link rel="stylesheet" href="<?= base_url('assets/cms/css/sweetalert2.min.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/cms/css/toastify.css') ?>">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -92,3 +94,10 @@
     });
 </script>
 <?= $this->endSection() ?>
+
+<?= $this->section('jscustom') ?>
+    <script src="<?= base_url('assets/cms/js/toastify.js') ?>"></script>
+    <?php if(session()->has('message')): ?>
+        <?= $this->include('Admin/layout/notif') ?>
+    <?php endif; ?>
+<?= $this->endSection('jscustom') ?>

@@ -42,14 +42,22 @@ class UserController extends BaseController
 
     public function store()
     {
-        $param = $this->request->getRawInput();
-        // dd($param->name);
-        // return $this->response->setJSON([
-        //     $param['fullName']
-        // ]);
-
-            $this->UserResponse->create($param);
-                return view('Admin/User/index');
+        // try {
+        //     $param = $this->request->getRawInput();
+        //     $this->UserResponse->create($param);
+        //         return view('Admin/User/index');
+        // } catch (\Throwable $th) {
+            $notification = [
+                'message'     => 'Failed to create Admin.',
+                'alert-type'  => 'danger',
+                'gravity'     => 'bottom',
+                'position'    => 'right'
+            ];
+            
+            return redirect()->to(route_to('admin.user.list'))->with('message', $notification);            
+            
+                // return redirect()->to(url_to('admin.user.list'))->with($notification);
+        // }
     }
 
     public function edit($id)

@@ -31,7 +31,8 @@
     <div class="card">
         <div class="card-body">
         <form class="form" action="<?= route_to('admin.user.store') ?>" method="POST">
-
+            <?= csrf_field() ?>
+            
                     <div class="row">
 
                         <div class="col-12 d-flex justify-content-start">
