@@ -7,12 +7,11 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-
 <div class="page-title">
     <div class="row">
         <div class="col-12 col-md-4 order-md-1 order-last">
             <a href="<?= route_to('admin.user.create') ?>" class="btn btn-primary">
-            <i class="fas fa-folder-plus"></i>
+                <i class="fas fa-folder-plus"></i>
                 Create
             </a>
         </div>
@@ -96,8 +95,8 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('jscustom') ?>
-    <script src="<?= base_url('assets/cms/js/toastify.js') ?>"></script>
-    <?php if(session()->has('message')): ?>
-        <?= $this->include('Admin/layout/notif') ?>
-    <?php endif; ?>
+<script src="<?= base_url('assets/cms/js/toastify.js') ?>"></script>
+<?php if (session()->has('message')) : ?>
+    <?= $this->include('Admin/layout/notif') ?>
+<?php endif; ?>
 <?= $this->endSection('jscustom') ?>
