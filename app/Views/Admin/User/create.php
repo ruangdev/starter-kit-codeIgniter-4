@@ -7,7 +7,7 @@
 <?= $this->section('content') ?>
 
 <div class="page-title">
-    
+
     <?php if (session()->has('errors')) : ?>
         <div class="alert alert-danger alert-dismissible show fade">
             <?= implode('<br>', session('errors')); ?>
@@ -57,35 +57,40 @@
                     <div class="col-md-6 col-12">
                         <div class="form-group">
                             <label for="fullName">Full Name</label>
-                            <input type="text" id="fullName" class="form-control" placeholder="Full Name..." name="fullName" autofocus>
+                            <input type="text" id="fullName" class="form-control" placeholder="Full Name..." value="<?= old('fullName'); ?>"
+                                    name="fullName" autofocus>
                         </div>
                     </div>
 
                     <div class="col-md-6 col-12">
                         <div class="form-group">
                             <label for="name">Username</label>
-                            <input type="text" id="name" class="form-control" placeholder="Username..." name="name">
+                            <input type="text" id="name" class="form-control" placeholder="Username..." value="<?= old('name'); ?>"
+                                    name="name">
                         </div>
                     </div>
 
                     <div class="col-md-6 col-12">
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" id="email" class="form-control" placeholder="Email..." name="email">
+                            <input type="email" id="email" class="form-control" placeholder="Email..." value="<?= old('email'); ?>"
+                                    name="email">
                         </div>
                     </div>
 
                     <div class="col-md-6 col-12">
                         <div class="form-group">
                             <label for="telegramid">Telegram ID</label>
-                            <input type="text" id="telegramid" class="form-control" name="telegramid" placeholder="Telegram ID...">
+                            <input type="text" id="telegramid" class="form-control" name="telegramid" value="<?= old('telegramid'); ?>"
+                                    placeholder="Telegram ID...">
                         </div>
                     </div>
 
                     <div class="col-md-6 col-12">
                         <div class="form-group">
                             <label for="Numberphone">Numberphone</label>
-                            <input type="text" id="Numberphone" class="form-control" name="Numberphone" placeholder="Numberphone...">
+                            <input type="text" id="Numberphone" class="form-control" name="Numberphone" value="<?= old('Numberphone'); ?>"
+                                    placeholder="Numberphone...">
                         </div>
                     </div>
 
@@ -107,5 +112,5 @@
 </section>
 <?= $this->endSection() ?>
 <?= $this->section('jscustom') ?>
-
+<script src="<?= base_url('assets/cms/js/showpassword.js') ?>"></script>
 <?= $this->endSection() ?>
