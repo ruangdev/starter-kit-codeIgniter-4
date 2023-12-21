@@ -11,7 +11,7 @@
 
         <div class="col-12 col-md-8 order-md-1 order-first">
             <h4 class="card-title">
-                Create Admin
+                Edit Admin
             </h4>
         </div>
 
@@ -20,7 +20,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="">Authorization</a></li>
                     <li class="breadcrumb-item"><a href="">List Admin</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Create Admin</li>
+                    <li class="breadcrumb-item active" aria-current="page">Edit Admin</li>
                 </ol>
             </nav>
         </div>
@@ -30,7 +30,7 @@
 <section class="section">
     <div class="card">
         <div class="card-body">
-        <form class="form" action="<?= route_to('admin.user.store') ?>" method="POST">
+        <form class="form" action="" method="POST">
 
                     <div class="row">
 
@@ -40,15 +40,15 @@
                                 Back
                             </a>
                             <button type="submit" class="btn btn-primary icon icon-left me-1 mb-1">
-                                <i class="fas fa-plus-circle"></i>
-                                Create
+                                <i class="fas fa-edit"></i>
+                                Edit
                             </button>
                         </div>
 
                         <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label for="fullName">Full Name</label>
-                                <input type="text" id="fullName" class="form-control"
+                                <input type="text" id="fullName" class="form-control" value="<?= $result->fullName ?>"
                                     placeholder="Full Name..." name="fullName" autofocus>
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                         <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label for="name">Username</label>
-                                <input type="text" id="name" class="form-control"
+                                <input type="text" id="name" class="form-control" value="<?= $result->username ?>"
                                     placeholder="Username..." name="name">
                             </div>
                         </div>
@@ -64,14 +64,15 @@
                         <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" id="email" class="form-control" placeholder="Email..." name="email">
+                                <input type="email" id="email" class="form-control" placeholder="Email..." value="<?= $result->email ?>"
+                                        name="email">
                             </div>
                         </div>
 
                         <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label for="telegramid">Telegram ID</label>
-                                <input type="text" id="telegramid" class="form-control"
+                                <input type="text" id="telegramid" class="form-control" value="<?= $result->TeleID ?>"
                                     name="telegramid" placeholder="Telegram ID...">
                             </div>
                         </div>
@@ -79,7 +80,7 @@
                         <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label for="Numberphone">Numberphone</label>
-                                <input type="text" id="Numberphone" class="form-control"
+                                <input type="text" id="Numberphone" class="form-control" value="<?= $result->numberPhone ?>"
                                     name="Numberphone" placeholder="Numberphone...">
                             </div>
                         </div>
