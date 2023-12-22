@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Validation;
+namespace App\Validation\User;
 
 use CodeIgniter\Validation\Rules;
 
-class UserValidation
+class StoreValidation extends Rules
 {
     public static function rules(): array
     {

@@ -2,16 +2,17 @@
 
 namespace App\Controllers\Admin;
 
-use Config\Services;
 use Config\Database;
+use Config\Services;
 use App\Helpers\UUID;
 use App\Models\Users;
 use Myth\Auth\Password;
 use App\Models\UserProfile;
-use App\Validation\UserValidation;
 use \Hermawan\DataTables\DataTable;
 use App\Controllers\BaseController;
 use App\Repository\User\UserResponse;
+use App\Validation\User\StoreValidation;
+use App\Validation\User\UpdateValidation;
 
 class UserController extends BaseController
 {
@@ -47,8 +48,8 @@ class UserController extends BaseController
 
     public function store()
     {
-        $validationRules    = UserValidation::rules();
-        $validationMessages = UserValidation::messages();
+        $validationRules    = StoreValidation::rules();
+        $validationMessages = StoreValidation::messages();
         $validation         = Services::validation();
         if (!$this->validate($validationRules, $validationMessages)) {
             return redirect()->to(route_to('admin.user.create'))->withInput()->with('errors', $validation->getErrors());
@@ -82,6 +83,13 @@ class UserController extends BaseController
 
     public function update($id)
     {
+        $validationRules    = UpdateValidation::rules($id);
+        $validationMessages = UpdateValidation::messages($id);
+        $validation         = Services::validation();
+        if (!$this->validate($validationRules, $validationMessages)) {
+            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
+        }
+
         $this->db->transBegin();
         try {
             $param = $this->request->getRawInput();
