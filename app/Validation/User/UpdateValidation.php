@@ -11,7 +11,7 @@ class UpdateValidation extends Rules
         return [
             'fullName'     => 'required|max_length[50]',
             'name'         => "required|max_length[50]|is_unique[users.username,id,$id]",
-            'email'        => "required|max_length[50]|is_unique[users.email,id,$id]",
+            'email'        => "required|max_length[50]|valid_email|is_unique[users.email,id,$id]",
             'telegramid'   => 'required|min_length[5]|max_length[20]',
             'Numberphone'  => 'required|regex_match[/^08\d{9,15}$/]'
         ];
