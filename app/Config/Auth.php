@@ -44,6 +44,47 @@ class Auth extends AuthConfig
 
     /**
      * --------------------------------------------------------------------
+     * Allow User Registration
+     * --------------------------------------------------------------------
+     *
+     * When enabled (default) any unregistered user may apply for a new
+     * account. If you disable registration you may need to ensure your
+     * controllers and views know not to offer registration.
+     *
+     * @var bool
+     */
+    public $allowRegistration = true;
+
+
+     /**
+     * --------------------------------------------------------------------
+     * Allow Persistent Login Cookies (Remember me)
+     * --------------------------------------------------------------------
+     *
+     * While every attempt has been made to create a very strong protection
+     * with the remember me system, there are some cases (like when you
+     * need extreme protection, like dealing with users financials) that
+     * you might not want the extra risk associated with this cookie-based
+     * solution.
+     *
+     * @var bool
+     */
+    public $allowRemembering = false;
+
+    /**
+     * --------------------------------------------------------------------
+     * Remember Length
+     * --------------------------------------------------------------------
+     *
+     * The amount of time, in seconds, that you want a login to last for.
+     * Defaults to 30 days.
+     *
+     * @var int
+     */
+    public $rememberLength = 30 * DAY;
+
+    /**
+     * --------------------------------------------------------------------
      * Libraries
      * --------------------------------------------------------------------
      *
