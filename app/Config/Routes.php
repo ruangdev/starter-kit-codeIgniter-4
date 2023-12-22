@@ -40,4 +40,5 @@ $routes->group('/cms/v1', ['filter' => 'login'], function($routes) {
     $routes->post('store-admin','Admin\UserController::store',['as' => 'admin.user.store']);
     $routes->get('edit-admin/(:segment)','Admin\UserController::edit/$1',['as' => 'admin.user.edit']);
     $routes->put('update-admin/(:segment)','Admin\UserController::update/$1',['as' => 'admin.user.update']);
+    $routes->delete('delete-admin/(:segment)','Admin\UserController::delete/$1',['as' => 'admin.user.delete']);
 });

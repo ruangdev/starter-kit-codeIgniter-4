@@ -7,4 +7,5 @@ interface UserDesign {
     public function create($param);
     public function find($id);
     public function update($param, $id);
+    public function delete($id);
 }

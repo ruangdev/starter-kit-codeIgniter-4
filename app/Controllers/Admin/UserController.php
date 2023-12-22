@@ -27,15 +27,16 @@ class UserController extends BaseController
         if($this->request->isAJAX()) {
             $result = $this->UserResponse->datatable();
             return DataTable::of($result)->addNumbering('no')
-                                        ->add('action', function($row){
-                                            return  "
-                                                        <a href='" . route_to('admin.user.edit', $row->id) . "' type='button' class='btn btn-primary btn-sm'>
-                                                            <i class='fas fa-edit'></i>
+                                        ->add('action', function($action){
+                                            return  '
+                                                        <a href="'.route_to('admin.user.edit', $action->id).'" type="button" class="btn btn-primary btn-sm">
+                                                            <i class="fas fa-edit"></i>
                                                         </a>
-                                                        <button type='button' class='btn btn-danger btn-sm') >
-                                                            <i class='fas fa-trash-alt'></i>
+                                                        <button type="button" class="btn btn-danger btn-sm delete-btn")
+                                                                data-uuid="'.$action->id.'">
+                                                            <i class="fas fa-trash-alt"></i>
                                                         </button>
-                                                    ";
+                                                    ';
                                         })->toJson(true);
         }
             return view('Admin/User/index');
@@ -113,6 +114,35 @@ class UserController extends BaseController
         } finally {
             $this->db->transCommit();
         }
+    }
+
+    public function delete($id)
+    {
+        try {
+            $this->UserResponse->delete($id);
+            $success = true;
+            $message = "Successfully to restore Data Admin.";
+        } catch (\Throwable $th) {
+            $success = false;
+            $message = "Failed to Restore data Admin.";
+        }
+            if($success == true) {
+                /**
+                 * Return response true
+                 */
+                return $this->response->setJSON([
+                    'success' => $success,
+                    'message' => $message,
+                ]);
+            } elseif ($success == false) {
+                /**
+                 * Return response false
+                 */
+                return $this->response->setJSON([
+                    'success' => $success,
+                    'message' => $message,
+                ]);
+            }
     }
 
     public function inactive()

@@ -2,7 +2,7 @@
 
 <?= $this->section('csscustom') ?>
 <link href="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.8/datatables.css" rel="stylesheet">
-<link rel="stylesheet" href="<?= base_url('assets/cms/css/sweetalert2.min.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/cms/css/sweetalert/sweetalert.min.css') ?>">
 <link rel="stylesheet" href="<?= base_url('assets/cms/css/toastify.css') ?>">
 <?= $this->endSection() ?>
 
@@ -54,13 +54,16 @@
 </section>
 <?= $this->endSection() ?>
 <?= $this->section('jscustom') ?>
-<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="<?= base_url('assets/cms/js/jquery.min.js') ?>"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.23/datatables.min.js"></script>
-<?= 
-$this->include('Admin/User/datatable/index');
-$this->endSection();
-?>
+<script src="<?= base_url('assets/cms/js/sweetalert/sweetalert.js') ?>"></script>
+
+
+<?= $this->include('Admin/User/datatable/index'); ?>
+<?= $this->include('Admin/User/js/trash'); ?>
+<?= $this->endSection(); ?>
+
 
 <?= $this->section('jscustom') ?>
 <script src="<?= base_url('assets/cms/js/toastify.js') ?>"></script>

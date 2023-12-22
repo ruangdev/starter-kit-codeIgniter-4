@@ -74,4 +74,10 @@ class UserResponse implements UserDesign {
                             'TeleID'        => $param['telegramid']
                         ]);
     }
+
+    public function delete($id)
+    {
+        $result = $this->users->find($id);
+            return $result->delete();
+    }
 }
