@@ -58,35 +58,40 @@
                     <div class="col-md-6 col-12">
                         <div class="form-group">
                             <label for="fullName">Full Name</label>
-                            <input type="text" id="fullName" class="form-control" value="<?= $result->fullName ?>" placeholder="Full Name..." name="fullName" autofocus>
+                            <input type="text" id="fullName" class="form-control" value="<?= old('fullName',$result->fullName); ?>"
+                                    placeholder="Full Name..." name="fullName" autofocus>
                         </div>
                     </div>
 
                     <div class="col-md-6 col-12">
                         <div class="form-group">
                             <label for="name">Username</label>
-                            <input type="text" id="name" class="form-control" value="<?= $result->username ?>" placeholder="Username..." name="name">
+                            <input type="text" id="name" class="form-control" value="<?= old('name',$result->username); ?>"
+                                    placeholder="Username..." name="name">
                         </div>
                     </div>
 
                     <div class="col-md-6 col-12">
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" id="email" class="form-control" placeholder="Email..." value="<?= $result->email ?>" name="email">
+                            <input type="email" id="email" class="form-control" value="<?= old('email',$result->email); ?>"
+                                    placeholder="Email..." value="<?= $result->email ?>" name="email">
                         </div>
                     </div>
 
                     <div class="col-md-6 col-12">
                         <div class="form-group">
                             <label for="telegramid">Telegram ID</label>
-                            <input type="text" id="telegramid" class="form-control" value="<?= $result->TeleID ?>" name="telegramid" placeholder="Telegram ID...">
+                            <input type="text" id="telegramid" class="form-control" value="<?= old('telegramid',$result->TeleID); ?>"
+                                    name="telegramid" placeholder="Telegram ID...">
                         </div>
                     </div>
 
                     <div class="col-md-6 col-12">
                         <div class="form-group">
                             <label for="Numberphone">Numberphone</label>
-                            <input type="text" id="Numberphone" class="form-control" value="<?= $result->numberPhone ?>" name="Numberphone" placeholder="Numberphone...">
+                            <input type="text" id="Numberphone" class="form-control" value="<?= old('Numberphone',$result->numberPhone); ?>"
+                                    name="Numberphone" placeholder="Numberphone...">
                         </div>
                     </div>
 

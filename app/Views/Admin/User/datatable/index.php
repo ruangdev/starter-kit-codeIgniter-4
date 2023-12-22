@@ -16,6 +16,9 @@
                     data: 'fullName'
                 },
                 {
+                    data: 'active'
+                },
+                {
                     data: 'email'
                 },
                 {

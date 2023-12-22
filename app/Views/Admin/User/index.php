@@ -35,17 +35,18 @@
 
 <section class="section">
     <div class="card">
-        <div class="card-body">
+        <div class="card-body table-responsive">
             <table class="table table-hover table-striped" id="tableAdmin">
                 <thead class="table-dark">
                     <tr>
                         <th class="text-left" width="50px">No.</th>
                         <th class="text-left" width="100px">Username</th>
                         <th class="text-left" width="100px">Full Name</th>
+                        <th class="text-left" width="50px">Status</th>
                         <th class="text-left" width="100px">Email</th>
                         <th class="text-left" width="100px">Numberphone</th>
-                        <th class="text-left" width="90px">Telegram ID</th>
-                        <th class="text-left" width="50px">Action</th>
+                        <th class="text-left" width="100px">Telegram ID</th>
+                        <th class="text-left" width="100px">Action</th>
                     </tr>
                 </thead>
             </table>

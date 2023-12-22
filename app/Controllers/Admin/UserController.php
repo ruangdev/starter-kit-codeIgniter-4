@@ -37,7 +37,25 @@ class UserController extends BaseController
                                                             <i class="fas fa-trash-alt"></i>
                                                         </button>
                                                     ';
-                                        })->toJson(true);
+                                        })
+                                        ->edit('active', function($active){
+                                            if((boolean) $active->active == true) {
+                                                return  '
+                                                            <button type="button" class="btn btn-primary btn-sm btn-active")
+                                                                data-uuid="'.$active->id.'">
+                                                                <i class="fas fa-user-check"></i>
+                                                            </button>
+                                                        ';
+                                            } elseif ((boolean) $active->active == false) {
+                                                return  '
+                                                            <button type="button" class="btn btn-danger btn-sm btn-inactive")
+                                                                data-uuid="'.$active->id.'">
+                                                                <i class="fas fa-user-lock"></i>
+                                                            </button>
+                                                        ';
+                                            }
+                                        })
+                                        ->toJson(true);
         }
             return view('Admin/User/index');
     }
@@ -121,10 +139,10 @@ class UserController extends BaseController
         try {
             $this->UserResponse->delete($id);
             $success = true;
-            $message = "Successfully to restore Data Admin.";
+            $message = "Successfully to Delete Data Admin.";
         } catch (\Throwable $th) {
             $success = false;
-            $message = "Failed to Restore data Admin.";
+            $message = "Failed to Delete data Admin.";
         }
             if($success == true) {
                 /**
@@ -145,7 +163,7 @@ class UserController extends BaseController
             }
     }
 
-    public function inactive()
+    public function inactive($id)
     {
         # code...
     }

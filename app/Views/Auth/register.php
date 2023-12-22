@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-    System Register CMS | RuangDev
+        System Register CMS | RuangDev
     </title>
 
     <!-- Fonts -->
@@ -45,6 +45,27 @@
                         </h4>
                     </div>
                     <div class="card-body shadow rounded">
+
+                        <?php if (session()->has('message')) : ?>
+                            <div class="alert alert-success">
+                                <?= session('message') ?>
+                            </div>
+                        <?php endif ?>
+
+                        <?php if (session()->has('error')) : ?>
+                            <div class="alert alert-danger">
+                                <?= session('error') ?>
+                            </div>
+                        <?php endif ?>
+
+                        <?php if (session()->has('errors')) : ?>
+                            <ul class="alert alert-danger">
+                                <?php foreach (session('errors') as $error) : ?>
+                                    <li><?= $error ?></li>
+                                <?php endforeach ?>
+                            </ul>
+                        <?php endif ?>
+
                         <div class="d-flex justify-content-center">
                             <img class="rounded-circle app-brand-size-logo" src="<?= base_url('assets/auth/image/logo.png') ?>">
                         </div>

@@ -24,7 +24,7 @@ class UserResponse implements UserDesign {
     {
         return $this->db->table('user_profile')
                         ->join('users', 'users.id = user_profile.user_id')
-                        ->select('users.id, users.email, users.username, user_profile.fullName, user_profile.numberPhone, user_profile.TeleID');
+                        ->select('users.id, users.email, users.active, users.username, user_profile.fullName, user_profile.numberPhone, user_profile.TeleID');
     }
     public function create($param)
     {
@@ -79,5 +79,10 @@ class UserResponse implements UserDesign {
     {
         $result = $this->users->find($id);
             return $result->delete();
+    }
+
+    public function inactive($id)
+    {
+        # code...
     }
 }

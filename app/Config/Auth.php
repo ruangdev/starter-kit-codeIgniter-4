@@ -4,6 +4,7 @@ namespace Config;
 
 use CodeIgniter\Config\BaseConfig;
 use Myth\Auth\Config\Auth as AuthConfig;
+use App\Authentication\LocalAuthenticator;
 
 class Auth extends AuthConfig
 {
@@ -39,6 +40,17 @@ class Auth extends AuthConfig
     public $views = [
         'login'           => 'app\View\Auth\login',
         'register'        => 'app\View\Auth\register',
+    ];
+
+    /**
+     * --------------------------------------------------------------------
+     * Libraries
+     * --------------------------------------------------------------------
+     *
+     * @var array
+     */
+    public $authenticationLibs = [
+        'local' => LocalAuthenticator::class,
     ];
 
 }
