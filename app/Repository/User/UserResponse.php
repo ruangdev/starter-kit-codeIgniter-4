@@ -81,8 +81,12 @@ class UserResponse implements UserDesign {
             return $result->delete();
     }
 
-    public function inactive($id)
+    public function status($id)
     {
-        # code...
+        $result = $this->users->find($id);
+        return $this->users->whereId($id)
+                            ->update([
+                                'active' => $result->active === 0 ? 1 : 0
+                            ]);
     }
 }

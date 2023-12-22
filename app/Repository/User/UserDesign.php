@@ -8,5 +8,5 @@ interface UserDesign {
     public function find($id);
     public function update($param, $id);
     public function delete($id);
-    public function inactive($id);
+    public function status($id);
 }

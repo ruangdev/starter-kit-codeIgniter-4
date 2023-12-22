@@ -41,14 +41,14 @@ class UserController extends BaseController
                                         ->edit('active', function($active){
                                             if((boolean) $active->active == true) {
                                                 return  '
-                                                            <button type="button" class="btn btn-primary btn-sm btn-active")
+                                                            <button type="button" class="btn btn-primary btn-sm status-btn")
                                                                 data-uuid="'.$active->id.'">
                                                                 <i class="fas fa-user-check"></i>
                                                             </button>
                                                         ';
                                             } elseif ((boolean) $active->active == false) {
                                                 return  '
-                                                            <button type="button" class="btn btn-danger btn-sm btn-inactive")
+                                                            <button type="button" class="btn btn-danger btn-sm status-btn")
                                                                 data-uuid="'.$active->id.'">
                                                                 <i class="fas fa-user-lock"></i>
                                                             </button>
@@ -163,8 +163,32 @@ class UserController extends BaseController
             }
     }
 
-    public function inactive($id)
+    public function status($id)
     {
-        # code...
+        try {
+            $this->UserResponse->status($id);
+            $success = true;
+            $message = "Successfully to Change Status Admin.";
+        } catch (\Throwable $th) {
+            $success = false;
+            $message = "Failed to Change Status Admin.";
+        }
+            if($success == true) {
+                /**
+                 * Return response true
+                 */
+                return $this->response->setJSON([
+                    'success' => $success,
+                    'message' => $message,
+                ]);
+            } elseif ($success == false) {
+                /**
+                 * Return response false
+                 */
+                return $this->response->setJSON([
+                    'success' => $success,
+                    'message' => $message,
+                ]);
+            }
     }
 }

@@ -60,11 +60,10 @@
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.23/datatables.min.js"></script>
 <script src="<?= base_url('assets/cms/js/sweetalert/sweetalert.js') ?>"></script>
 
-
 <?= $this->include('Admin/User/datatable/index'); ?>
 <?= $this->include('Admin/User/js/trash'); ?>
+<?= $this->include('Admin/User/js/status'); ?>
 <?= $this->endSection(); ?>
-
 
 <?= $this->section('jscustom') ?>
 <script src="<?= base_url('assets/cms/js/toastify.js') ?>"></script>
