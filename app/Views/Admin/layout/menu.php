@@ -35,27 +35,27 @@
             </a>
             <ul class="submenu ">
                 <?php if (has_permission('show.users')) : ?>
-                    <li class="submenu-item ">
+                    <li class="submenu-item">
                         <a href="<?= route_to('admin.user.list') ?>">
                             Data Admin
                         </a>
                     </li>
                 <?php endif; ?>
 
-                <li class="submenu-item ">
-                    <a href="">
+                <li class="submenu-item">
+                    <a href="<?= route_to('admin.role.create') ?>">
                         Data Role
                     </a>
                 </li>
 
-                <li class="submenu-item ">
+                <li class="submenu-item">
                     <a href="">
                         Data Module
                     </a>
                 </li>
 
-                <li class="submenu-item ">
-                    <a href="">
+                <li class="submenu-item">
+                    <a href="<?= route_to('admin.permission.list') ?>">
                         Data Permission
                     </a>
                 </li>

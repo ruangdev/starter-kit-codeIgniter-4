@@ -51,4 +51,15 @@ $routes->group('/cms/v1', ['filter' => 'login'], function($routes) {
     $routes->put('update-admin/(:segment)','Admin\UserController::update/$1',['as' => 'admin.user.update']);
     $routes->delete('delete-admin/(:segment)','Admin\UserController::delete/$1',['as' => 'admin.user.delete']);
     $routes->put('status-admin/(:segment)','Admin\UserController::status/$1',['as' => 'admin.user.status']);
+
+    /**
+     * Route Role
+     */
+    $routes->get('list-role','Authorization\RoleController::index',['as' => 'admin.role.list']);
+    $routes->get('create-role','Authorization\RoleController::create',['as' => 'admin.role.create']);
+
+    /**
+     * Route Role
+     */
+    $routes->get('list-permission','Authorization\PermissionController::index',['as' => 'admin.permission.list']);
 });

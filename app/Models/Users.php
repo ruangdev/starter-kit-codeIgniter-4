@@ -14,6 +14,7 @@ class Users extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'uuid',
         'email',
         'username',
         'password_hash',

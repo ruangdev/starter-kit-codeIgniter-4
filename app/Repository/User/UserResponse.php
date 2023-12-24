@@ -29,6 +29,7 @@ class UserResponse implements UserDesign {
     public function create($param)
     {
         $result = $this->users->create([
+            'uuid'           => $this->uuid,
             'username'       => $param['name'],
             'email'          => $param['email'],
             'password_hash'  => Password::hash($param['password']),
