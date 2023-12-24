@@ -30,12 +30,21 @@ $routes->get('/', 'Home::index',['as' => 'home.site', 'filter' => 'login']);
  * Route Admin
  */
 $routes->group('/cms/v1', ['filter' => 'login'], function($routes) {
+
+    /**
+     * Route Error Page
+     */
+    $routes->get('forbidden-page','Errors\Page403Controller::index',['as' => 'page.403']);
+
+    /**
+     * Route Dashboard
+     */
     $routes->get('dashboard', 'Admin\DashboardController::index',['as' => 'admin.dashboard']);
 
     /**
      * Route User Management
      */
-    $routes->get('list-admin', 'Admin\UserController::index',['as' => 'admin.user.list']);
+    $routes->get('list-admin', 'Admin\UserController::index',['as' => 'admin.user.list', 'filter' => 'permission:show.users']);
     $routes->get('create-admin','Admin\UserController::create',['as' => 'admin.user.create']);
     $routes->post('store-admin','Admin\UserController::store',['as' => 'admin.user.store']);
     $routes->get('edit-admin/(:segment)','Admin\UserController::edit/$1',['as' => 'admin.user.edit']);

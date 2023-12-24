@@ -2,15 +2,15 @@
 
 namespace Config;
 
+use App\Filters\Role;
+use App\Filters\Permission;
 use CodeIgniter\Filters\CSRF;
 use CodeIgniter\Filters\Honeypot;
-use Myth\Auth\Filters\RoleFilter;
 use CodeIgniter\Config\BaseConfig;
 use Myth\Auth\Filters\LoginFilter;
 use CodeIgniter\Filters\DebugToolbar;
 use CodeIgniter\Filters\InvalidChars;
 use CodeIgniter\Filters\SecureHeaders;
-use Myth\Auth\Filters\PermissionFilter;
 
 class Filters extends BaseConfig
 {
@@ -29,8 +29,8 @@ class Filters extends BaseConfig
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
         'login'         => LoginFilter::class,
-        'role'          => RoleFilter::class,
-        'permission'    => PermissionFilter::class
+        'role'          => Role::class,
+        'permission'    => Permission::class
     ];
 
     /**

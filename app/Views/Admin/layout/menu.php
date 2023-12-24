@@ -34,11 +34,13 @@
                 <span>Authorization</span>
             </a>
             <ul class="submenu ">
-                <li class="submenu-item ">
-                    <a href="<?= route_to('admin.user.list')?>">
-                        Data Admin
-                    </a>
-                </li>
+                <?php if (has_permission('show.users')) : ?>
+                    <li class="submenu-item ">
+                        <a href="<?= route_to('admin.user.list') ?>">
+                            Data Admin
+                        </a>
+                    </li>
+                <?php endif; ?>
 
                 <li class="submenu-item ">
                     <a href="">
