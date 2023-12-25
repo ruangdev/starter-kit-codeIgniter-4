@@ -29,7 +29,7 @@ class UserController extends BaseController
             return DataTable::of($result)->addNumbering('no')
                                         ->add('action', function($action){
                                             return  '
-                                                        <a href="'.route_to('admin.user.edit', $action->id).'" type="button" class="btn btn-primary btn-sm">
+                                                        <a href="'.route_to('admin.user.edit', $action->uuid).'" type="button" class="btn btn-primary btn-sm">
                                                             <i class="fas fa-edit"></i>
                                                         </a>
                                                         <button type="button" class="btn btn-danger btn-sm delete-btn")
@@ -96,8 +96,12 @@ class UserController extends BaseController
 
     public function edit($id)
     {
-        $result = $this->UserResponse->find($id);
-            return view('Admin/User/edit',compact('result'));
+            $result = $this->UserResponse->find($id);
+            if(empty($result)) {
+                return view('Admin/layout/errors/404');
+            } else {
+                return view('Admin/User/edit',compact('result'));
+            }
     }
 
     public function update($id)
