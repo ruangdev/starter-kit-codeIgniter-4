@@ -27,7 +27,6 @@
             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="">Authorization</a></li>
-                    <li class="breadcrumb-item"><a href="">List Permission</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Create Permission</li>
                 </ol>
             </nav>
@@ -38,7 +37,7 @@
 <section class="section">
     <div class="card">
         <div class="card-body">
-            <form class="form" action="" method="POST">
+            <form class="form" action="<?= route_to('admin.permission.store') ?>" method="POST">
                 <?= csrf_field() ?>
 
                 <div class="row">
@@ -74,7 +73,7 @@
                         <div class="form-group">
                             <label for="module">Module</label>
                             <select class="form-select" id="module" name="module">
-                                <option selected>Choose Module</option>
+                                <option value="" selected>Choose Module</option>
                                 <?php foreach ($modules as $module): ?>
                                     <?php if (old('module') == $module->id): ?>
                                         <option value="<?= esc($module->id) ?>" selected>
