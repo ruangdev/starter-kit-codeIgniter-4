@@ -102,6 +102,7 @@ class CreateAuthTables extends Migration
         // Permissions Table
         $fields = [
             'id'                => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
+            'uuid'              => ['type' => 'CHAR', 'constraint' => 36],
             'id_auth_module'    => ['type' => 'CHAR', 'constraint' => 36],
             'name'              => ['type' => 'varchar', 'constraint' => 255],
             'description'       => ['type' => 'varchar', 'constraint' => 255],

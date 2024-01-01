@@ -62,4 +62,5 @@ $routes->group('/cms/v1', ['filter' => 'login'], function($routes) {
      * Route Role
      */
     $routes->get('list-permission','Authorization\PermissionController::index',['as' => 'admin.permission.list']);
+    $routes->get('create-permission','Authorization\PermissionController::create',['as' => 'admin.permission.create']);
 });
