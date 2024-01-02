@@ -64,4 +64,6 @@ $routes->group('/cms/v1', ['filter' => 'login'], function($routes) {
     $routes->get('list-permission','Authorization\PermissionController::index',['as' => 'admin.permission.list']);
     $routes->get('create-permission','Authorization\PermissionController::create',['as' => 'admin.permission.create']);
     $routes->post('store-permission','Authorization\PermissionController::store',['as' => 'admin.permission.store']);
+    $routes->get('edit-permission/(:segment)','Authorization\PermissionController::edit/$1',['as' => 'admin.permission.edit']);
+    $routes->put('update-permission/(:segment)','Authorization\PermissionController::update/$1',['as' => 'admin.permission.update']);
 });

@@ -96,12 +96,12 @@ class UserController extends BaseController
 
     public function edit($id)
     {
-            $result = $this->UserResponse->find($id);
-            if(empty($result)) {
-                return view('Admin/layout/errors/404');
-            } else {
-                return view('Admin/User/edit',compact('result'));
-            }
+        $result = $this->UserResponse->find($id);
+        if(empty($result)) {
+            return view('Admin/layout/errors/404');
+        } else {
+            return view('Admin/User/edit',compact('result'));
+        }
     }
 
     public function update($id)

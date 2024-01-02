@@ -43,12 +43,12 @@
             <table class="table table-hover table-striped" id="tableListPermission">
                 <thead class="table-dark">
                     <tr>
-                        <th class="text-left" width="50px">No.</th>
+                        <th class="text-left" width="10px">No.</th>
                         <th class="text-left" width="100px">Permission Name</th>
                         <th class="text-left" width="100px">Module Name</th>
                         <th class="text-left" width="100px">Permission Description</th>
                         <th class="text-left" width="100px">Created Date</th>
-                        <th class="text-left" width="100px">Action</th>
+                        <th class="text-left" width="50px">Action</th>
                     </tr>
                 </thead>
             </table>

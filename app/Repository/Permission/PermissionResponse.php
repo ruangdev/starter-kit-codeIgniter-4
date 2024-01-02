@@ -51,4 +51,25 @@ class PermissionResponse implements PermissionDesign {
             'description'       =>$param['permissionDescription']
         ]);
     }
+
+    public function find($id)
+    {
+        return $this->db->table('auth_permissions')
+                        ->select('auth_permissions.uuid,
+                                auth_permissions.id_auth_module,
+                                auth_permissions.name,
+                                auth_permissions.description,
+                                auth_module.module_name,
+                                auth_permissions.created_at')
+                        ->join('auth_module',
+                                'auth_module.id = auth_permissions.id_auth_module'
+                        )
+                        ->where('auth_permissions.uuid',$id)
+                        ->get()->getRow();
+    }
+
+    public function update($id)
+    {
+        return $id;
+    }
 }

@@ -23,7 +23,7 @@ class PermissionController extends BaseController
                 return DataTable::of($result)->addNumbering('no')
                     ->add('action', function($action){
                         return  '
-                                    <a href="" type="button" class="btn btn-primary btn-sm">
+                                    <a href="'.route_to('admin.permission.edit', $action->uuid).'" type="button" class="btn btn-primary btn-sm">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <button type="button" class="btn btn-danger btn-sm delete-btn")
@@ -70,5 +70,24 @@ class PermissionController extends BaseController
                     ];   
                         return redirect()->to(route_to('admin.permission.list'))->with('message', $notification);
             }
+    }
+
+    public function edit($id)
+    {
+        $result = $this->PermissionResponse->find($id);
+        if(empty($result)) {
+            return view('Admin/layout/errors/404');
+        } else {
+            $modules = $this->PermissionResponse->listModule();
+                return view('Admin/Authorization/Permission/edit',compact('modules','result'));
+        }
+    }
+
+    public function update($id)
+    {
+        $result = $this->PermissionResponse->update($id);
+        return $this->response->setJSON([
+            'data' => $result,
+            ]);
     }
 }
