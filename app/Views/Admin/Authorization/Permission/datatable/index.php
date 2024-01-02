@@ -12,7 +12,8 @@
                     orderable: false
                 },
                 {
-                    data: 'name'
+                    data: 'name',
+                    orderable: false
                 },
                 {
                     data: 'module_name',

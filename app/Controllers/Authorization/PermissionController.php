@@ -85,9 +85,24 @@ class PermissionController extends BaseController
 
     public function update($id)
     {
-        $result = $this->PermissionResponse->update($id);
-        return $this->response->setJSON([
-            'data' => $result,
-            ]);
+        try {
+            $param  = $this->request->getRawInput();
+            $result = $this->PermissionResponse->update($param, $id);
+            $notification = [
+                'message'     => 'Successfully updated Permission.',
+                'alert-type'  => 'success',
+                'gravity'     => 'bottom',
+                'position'    => 'right'
+            ]; 
+                return redirect()->to(route_to('admin.permission.list'))->with('message', $notification);
+        } catch (\Throwable $th) {
+            $notification = [
+                'message'     => 'Failed to updated Permission.',
+                'alert-type'  => 'danger',
+                'gravity'     => 'bottom',
+                'position'    => 'right'
+            ];   
+                return redirect()->to(route_to('admin.permission.list'))->with('message', $notification);
+        }
     }
 }

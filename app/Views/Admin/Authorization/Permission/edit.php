@@ -74,21 +74,15 @@
                             <select class="form-select" id="module" name="module">
                                 <option value="" selected>Choose Module</option>
                                 <?php foreach ($modules as $module) : ?>
-                                    <?php if (old('module') == $module->id) : ?>
-                                        <option value="<?= esc($module->id) ?>" selected>
-                                            <?= esc($module->module_name) ?>
-                                        </option>
-                                    <?php else : ?>
-                                        <?php if ($result->id_auth_module == $module->id) : ?>
-                                            <option value="<?= esc($module->id) ?>" selected>
-                                                <?= esc($module->module_name) ?>
-                                            </option>
-                                        <?php endif; ?>
-                                    <?php endif; ?>
+                                    <?php $selected = (old('module') == $module->id || $result->id_auth_module == $module->id) ? 'selected' : ''; ?>
+                                    <option value="<?= esc($module->id) ?>" <?= $selected ?>>
+                                        <?= esc($module->module_name) ?>
+                                    </option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
                     </div>
+
                 </div>
             </form>
         </div>

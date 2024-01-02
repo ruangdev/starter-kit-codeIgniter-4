@@ -7,5 +7,5 @@ interface PermissionDesign {
     public function listModule();
     public function create($param);
     public function find($id);
-    public function update($id);
+    public function update($param, $id);
 }

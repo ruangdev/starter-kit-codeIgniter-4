@@ -68,8 +68,13 @@ class PermissionResponse implements PermissionDesign {
                         ->get()->getRow();
     }
 
-    public function update($id)
+    public function update($param, $id)
     {
-        return $id;
+        $this->Permission->whereUuid($id)
+                         ->update([
+                            'name'              => $param['permissionName'],
+                            'description'       => $param['permissionDescription'],
+                            'id_auth_module'    => $param['module']
+                         ]);
     }
 }
