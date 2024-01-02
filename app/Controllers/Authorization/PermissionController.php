@@ -3,9 +3,10 @@
 namespace App\Controllers\Authorization;
 
 use Config\Services;
-use App\Controllers\BaseController;
 use \Hermawan\DataTables\DataTable;
+use App\Controllers\BaseController;
 use App\Validation\Permission\StoreValidation;
+use App\Validation\Permission\UpdateValidation;
 use App\Repository\Permission\PermissionResponse;
 
 class PermissionController extends BaseController
@@ -85,6 +86,13 @@ class PermissionController extends BaseController
 
     public function update($id)
     {
+        $validationRules    = UpdateValidation::rules($id);
+        $validationMessages = UpdateValidation::messages();
+        $validation         = Services::validation();
+        if (!$this->validate($validationRules, $validationMessages)) {
+            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
+        }
+        
         try {
             $param  = $this->request->getRawInput();
             $result = $this->PermissionResponse->update($param, $id);
