@@ -59,7 +59,7 @@ $routes->group('/cms/v1', ['filter' => 'login'], function($routes) {
     $routes->get('create-role','Authorization\RoleController::create',['as' => 'admin.role.create']);
 
     /**
-     * Route Role
+     * Route Permission
      */
     $routes->get('list-permission','Authorization\PermissionController::index',['as' => 'admin.permission.list']);
     $routes->get('create-permission','Authorization\PermissionController::create',['as' => 'admin.permission.create']);
@@ -67,4 +67,9 @@ $routes->group('/cms/v1', ['filter' => 'login'], function($routes) {
     $routes->get('edit-permission/(:segment)','Authorization\PermissionController::edit/$1',['as' => 'admin.permission.edit']);
     $routes->put('update-permission/(:segment)','Authorization\PermissionController::update/$1',['as' => 'admin.permission.update']);
     $routes->delete('delete-permission/(:segment)','Authorization\PermissionController::delete/$1',['as' => 'admin.permission.delete']);
+
+    /**
+     * Route Module
+     */
+    $routes->get('list-module','Authorization\ModuleController::index',['as' => 'admin.module.list']);
 });

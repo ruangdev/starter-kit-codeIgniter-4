@@ -49,7 +49,7 @@
                 </li>
 
                 <li class="submenu-item">
-                    <a href="">
+                    <a href="<?= route_to('admin.module.list') ?>">
                         Data Module
                     </a>
                 </li>
