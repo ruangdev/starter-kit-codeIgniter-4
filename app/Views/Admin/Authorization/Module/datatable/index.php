@@ -1,26 +1,18 @@
 <script>
     $(document).ready(function() {
-        $('#tableListPermission').DataTable({
+        $('#tableListModule').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '/cms/v1/list-permission',
+            ajax: '/cms/v1/list-module',
             order: [
-                [4, 'desc']
+                [2, 'desc']
             ],
             columns: [{
                     data: 'no',
                     orderable: false
                 },
                 {
-                    data: 'name',
-                    orderable: false
-                },
-                {
                     data: 'module_name',
-                    orderable: false
-                },
-                {
-                    data: 'description',
                     orderable: false
                 },
                 {
