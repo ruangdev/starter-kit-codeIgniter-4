@@ -106,6 +106,8 @@ class CreateAuthTables extends Migration
             'id_auth_module'    => ['type' => 'CHAR', 'constraint' => 36],
             'name'              => ['type' => 'varchar', 'constraint' => 255],
             'description'       => ['type' => 'varchar', 'constraint' => 255],
+            'created_at'        => ['type' => 'datetime', 'null' => true],
+            'updated_at'        => ['type' => 'datetime', 'null' => true],
         ];
 
         $this->forge->addField($fields);

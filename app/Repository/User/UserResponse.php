@@ -12,6 +12,11 @@ use App\Repository\User\UserDesign;
 
 class UserResponse implements UserDesign {
 
+    protected $db;
+    protected $users;
+    protected $profile;
+    protected $uuid;
+
     public function __construct()
     {
         $this->db        = Database::connect();

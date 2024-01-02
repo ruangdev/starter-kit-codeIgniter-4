@@ -45,7 +45,9 @@
                     <tr>
                         <th class="text-left" width="50px">No.</th>
                         <th class="text-left" width="100px">Permission Name</th>
+                        <th class="text-left" width="100px">Module Name</th>
                         <th class="text-left" width="100px">Permission Description</th>
+                        <th class="text-left" width="100px">Created Date</th>
                         <th class="text-left" width="100px">Action</th>
                     </tr>
                 </thead>
@@ -60,6 +62,8 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.23/datatables.min.js"></script>
 <script src="<?= base_url('assets/cms/js/sweetalert/sweetalert.js') ?>"></script>
+
+<?= $this->include('Admin/Authorization/Permission/datatable/index'); ?>
 <?= $this->endSection(); ?>
 
 <?= $this->section('jscustom') ?>

@@ -4,6 +4,7 @@ namespace App\Controllers\Authorization;
 
 use Config\Services;
 use App\Controllers\BaseController;
+use \Hermawan\DataTables\DataTable;
 use App\Validation\Permission\StoreValidation;
 use App\Repository\Permission\PermissionResponse;
 
@@ -17,7 +18,23 @@ class PermissionController extends BaseController
 
     public function index()
     {
-        return view('Admin/Authorization/Permission/index');
+        if($this->request->isAJAX()) {
+            $result = $this->PermissionResponse->datatable();
+                return DataTable::of($result)->addNumbering('no')
+                    ->add('action', function($action){
+                        return  '
+                                    <a href="" type="button" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <button type="button" class="btn btn-danger btn-sm delete-btn")
+                                            data-uuid="">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                ';
+                    })
+                ->toJson(true);
+        }
+            return view('Admin/Authorization/Permission/index');
     }
 
     public function create()

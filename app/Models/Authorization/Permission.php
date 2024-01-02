@@ -2,12 +2,12 @@
 
 namespace App\Models\Authorization;
 
+use App\Models\Authorization\Module;
 use Illuminate\Database\Eloquent\Model;
 
 class Permission extends Model
 {
     protected $table    = 'auth_permissions';
-    public $timestamps  = false;
     
     // 	$id = $authorize->createPermission('blog.posts.manage', 'Allows a user to create, edit, and delete blog posts.');
 
