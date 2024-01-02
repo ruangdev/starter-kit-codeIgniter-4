@@ -77,4 +77,10 @@ class PermissionResponse implements PermissionDesign {
                             'id_auth_module'    => $param['module']
                          ]);
     }
+
+    public function delete($id)
+    {
+        $result = $this->Permission->whereUuid($id);
+        return $result->delete();
+    }
 }

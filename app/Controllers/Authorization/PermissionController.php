@@ -28,7 +28,7 @@ class PermissionController extends BaseController
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <button type="button" class="btn btn-danger btn-sm delete-btn")
-                                            data-uuid="">
+                                            data-uuid="'.$action->uuid.'">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 ';
@@ -112,5 +112,34 @@ class PermissionController extends BaseController
             ];   
                 return redirect()->to(route_to('admin.permission.list'))->with('message', $notification);
         }
+    }
+
+    public function delete($id)
+    {
+        try {
+            $this->PermissionResponse->delete($id);
+            $success = true;
+            $message = "Successfully to Delete Data Permission.";
+        } catch (\Throwable $th) {
+            $success = false;
+            $message = "Failed to Delete data Permission.";
+        }
+            if($success == true) {
+                /**
+                 * Return response true
+                 */
+                return $this->response->setJSON([
+                    'success' => $success,
+                    'message' => $message,
+                ]);
+            } elseif ($success == false) {
+                /**
+                 * Return response false
+                 */
+                return $this->response->setJSON([
+                    'success' => $success,
+                    'message' => $message,
+                ]);
+            }
     }
 }

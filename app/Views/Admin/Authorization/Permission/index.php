@@ -64,6 +64,7 @@
 <script src="<?= base_url('assets/cms/js/sweetalert/sweetalert.js') ?>"></script>
 
 <?= $this->include('Admin/Authorization/Permission/datatable/index'); ?>
+<?= $this->include('Admin/Authorization/Permission/js/trash'); ?>
 <?= $this->endSection(); ?>
 
 <?= $this->section('jscustom') ?>
