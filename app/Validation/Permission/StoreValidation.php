@@ -9,8 +9,8 @@ class StoreValidation extends Rules
     public static function rules(): array
     {
         return [
-            'module'    => 'required',
-            'permissionName'              => 'required|alpha',
+            'module'                      => 'required',
+            'permissionName'              => 'required|regex_match[/^[a-z\.]+$/]|is_unique[auth_permissions.name]',
             'permissionDescription'       => 'required'
         ];
     }
@@ -22,8 +22,9 @@ class StoreValidation extends Rules
                 'required'  => 'Module wajib diisi.'
             ],
             'permissionName' => [
-                'required'  => 'Nama Permission wajib diisi.',
-                'alpha'     => 'Nama Permission hanya boleh berisi huruf kecil.'
+                'required'      => 'Nama Permission wajib diisi.',
+                'regex_match'   => 'Nama Permission hanya boleh diisi dengan huruf kecil dan titik saja.',
+                'is_unique'     => 'Nama Permission harus berisi nilai unik'
             ],
             'permissionDescription' => [
                 'required'  => 'Deskripsi Permission wajib diisi.'
