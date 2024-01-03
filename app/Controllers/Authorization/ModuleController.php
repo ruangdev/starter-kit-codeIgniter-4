@@ -36,4 +36,9 @@ class ModuleController extends BaseController
         }
             return view('Admin/Authorization/Module/index');
     }
+
+    public function create()
+    {
+        return view('Admin/Authorization/Module/create');
+    }
 }
