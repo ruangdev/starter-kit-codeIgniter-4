@@ -74,4 +74,5 @@ $routes->group('/cms/v1', ['filter' => 'login'], function($routes) {
     $routes->get('list-module','Authorization\ModuleController::index',['as' => 'admin.module.list']);
     $routes->get('create-module','Authorization\ModuleController::create',['as' => 'admin.module.create']);
     $routes->post('store-module','Authorization\ModuleController::store',['as' => 'admin.module.store']);
+    $routes->get('edit-module/(:segment)','Authorization\ModuleController::edit/$1',['as' => 'admin.module.edit']);
 });

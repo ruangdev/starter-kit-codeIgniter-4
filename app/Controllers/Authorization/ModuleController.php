@@ -24,7 +24,7 @@ class ModuleController extends BaseController
             return DataTable::of($result)->addNumbering('no')
                 ->add('action', function($action){
                     return  '
-                                <a href="" type="button" class="btn btn-primary btn-sm">
+                                <a href="'.route_to('admin.module.edit', $action->id).'" type="button" class="btn btn-primary btn-sm">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <button type="button" class="btn btn-danger btn-sm delete-btn")
@@ -52,7 +52,7 @@ class ModuleController extends BaseController
             return redirect()->to(route_to('admin.module.create'))->withInput()->with('errors', $validation->getErrors());
         }
 
-        // try {
+        try {
             $param = $this->request->getRawInput();
             $this->ModuleResponse->store($param);
             $notification = [
@@ -62,14 +62,19 @@ class ModuleController extends BaseController
                 'position'    => 'right'
             ]; 
                 return redirect()->to(route_to('admin.module.list'))->with('message', $notification);
-        // } catch (\Throwable $th) {
-        //     $notification = [
-        //         'message'     => 'Failed to created Module.',
-        //         'alert-type'  => 'danger',
-        //         'gravity'     => 'bottom',
-        //         'position'    => 'right'
-        //     ];   
-        //         return redirect()->to(route_to('admin.module.list'))->with('message', $notification);
-        // }
+        } catch (\Throwable $th) {
+            $notification = [
+                'message'     => 'Failed to created Module.',
+                'alert-type'  => 'danger',
+                'gravity'     => 'bottom',
+                'position'    => 'right'
+            ];   
+                return redirect()->to(route_to('admin.module.list'))->with('message', $notification);
+        }
+    }
+
+    public function edit($id)
+    {
+        return view('Admin/Authorization/Module/edit');
     }
 }
