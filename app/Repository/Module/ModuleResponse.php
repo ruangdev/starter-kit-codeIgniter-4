@@ -24,4 +24,12 @@ class ModuleResponse implements ModuleDesign {
     {
         return $this->db->table('auth_module');
     }
+
+    public function store($param)
+    {
+        $this->Module->create([
+            'id'            =>$this->uuid,
+            'module_name'   =>$param['module'],
+        ]);
+    }
 }

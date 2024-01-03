@@ -12,6 +12,7 @@ class Module extends Model
     protected $primaryKey   = 'id';
 
     protected $fillable     = [
+        'id',
         'module_name'
     ];
 }

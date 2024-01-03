@@ -7,6 +7,7 @@ use \Hermawan\DataTables\DataTable;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Repository\Module\ModuleResponse;
+use App\Validation\Module\StoreValidation;
 
 class ModuleController extends BaseController
 {
@@ -40,5 +41,35 @@ class ModuleController extends BaseController
     public function create()
     {
         return view('Admin/Authorization/Module/create');
+    }
+
+    public function store()
+    {
+        $validationRules    = StoreValidation::rules();
+        $validationMessages = StoreValidation::messages();
+        $validation         = Services::validation();
+        if (!$this->validate($validationRules, $validationMessages)) {
+            return redirect()->to(route_to('admin.module.create'))->withInput()->with('errors', $validation->getErrors());
+        }
+
+        // try {
+            $param = $this->request->getRawInput();
+            $this->ModuleResponse->store($param);
+            $notification = [
+                'message'     => 'Successfully created Module.',
+                'alert-type'  => 'success',
+                'gravity'     => 'bottom',
+                'position'    => 'right'
+            ]; 
+                return redirect()->to(route_to('admin.module.list'))->with('message', $notification);
+        // } catch (\Throwable $th) {
+        //     $notification = [
+        //         'message'     => 'Failed to created Module.',
+        //         'alert-type'  => 'danger',
+        //         'gravity'     => 'bottom',
+        //         'position'    => 'right'
+        //     ];   
+        //         return redirect()->to(route_to('admin.module.list'))->with('message', $notification);
+        // }
     }
 }

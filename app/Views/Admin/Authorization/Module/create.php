@@ -37,7 +37,7 @@
 <section class="section">
     <div class="card">
         <div class="card-body">
-            <form class="form" action="" method="POST">
+            <form class="form" action="<?= route_to('admin.module.store') ?>" method="POST">
                 <?= csrf_field() ?>
 
                 <div class="row">
