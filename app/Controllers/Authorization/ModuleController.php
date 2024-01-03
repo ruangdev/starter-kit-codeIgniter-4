@@ -75,6 +75,34 @@ class ModuleController extends BaseController
 
     public function edit($id)
     {
-        return view('Admin/Authorization/Module/edit');
+        $result = $this->ModuleResponse->find($id);
+        if(empty($result)) {
+            return view('Admin/layout/errors/404');
+        } else {
+            return view('Admin/Authorization/Module/edit',compact('result'));
+        }
+    }
+
+    public function update($id)
+    {
+        // try {
+            $param  = $this->request->getRawInput();
+            $result = $this->ModuleResponse->update($param, $id);
+            $notification = [
+                'message'     => 'Successfully updated Module.',
+                'alert-type'  => 'success',
+                'gravity'     => 'bottom',
+                'position'    => 'right'
+            ]; 
+                return redirect()->to(route_to('admin.module.list'))->with('message', $notification);
+        // } catch (\Throwable $th) {
+        //     $notification = [
+        //         'message'     => 'Failed to updated Module.',
+        //         'alert-type'  => 'danger',
+        //         'gravity'     => 'bottom',
+        //         'position'    => 'right'
+        //     ];   
+        //         return redirect()->to(route_to('admin.module.list'))->with('message', $notification);
+        // }
     }
 }

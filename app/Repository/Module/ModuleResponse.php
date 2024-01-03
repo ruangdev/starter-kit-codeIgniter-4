@@ -32,4 +32,16 @@ class ModuleResponse implements ModuleDesign {
             'module_name'   =>$param['module'],
         ]);
     }
+
+    public function find($id)
+    {
+        return $this->Module->find($id);
+    }
+
+    public function update($param, $id)
+    {
+        $this->Module->whereId($id)->update([
+            'module_name' =>$param['module_name']
+        ]);
+    }
 }

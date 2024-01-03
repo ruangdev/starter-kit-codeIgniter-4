@@ -37,7 +37,7 @@
 <section class="section">
     <div class="card">
         <div class="card-body">
-            <form class="form" action="" method="POST">
+            <form class="form" action="<?= route_to('admin.module.update', $result->id) ?>" method="POST">
                 <?= csrf_field() ?>
                 <input type="hidden" name="_method" value="PUT">
 
@@ -57,7 +57,7 @@
                     <div class="col-md-6 col-12">
                         <div class="form-group">
                             <label for="module_name">Module Name</label>
-                            <input type="text" id="module_name" class="form-control" placeholder="Module Name..." value="<?= old('module_name'); ?>" name="module_name" autofocus>
+                            <input type="text" id="module_name" class="form-control" placeholder="Module Name..." value="<?= old('module_name',$result->module_name); ?>" name="module_name" autofocus>
                         </div>
                     </div>
                 </div>
