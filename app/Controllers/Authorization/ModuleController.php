@@ -29,7 +29,7 @@ class ModuleController extends BaseController
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <button type="button" class="btn btn-danger btn-sm delete-btn")
-                                        data-uuid="">
+                                        data-uuid="'.$action->id.'">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
                             ';
@@ -112,5 +112,34 @@ class ModuleController extends BaseController
             ];   
                 return redirect()->to(route_to('admin.module.list'))->with('message', $notification);
         }
+    }
+
+    public function delete($id)
+    {
+        try {
+            $this->ModuleResponse->delete($id);
+            $success = true;
+            $message = "Successfully to Delete Data Module.";
+        } catch (\Throwable $th) {
+            $success = false;
+            $message = "Failed to Delete Data Module.";
+        }
+            if($success == true) {
+                /**
+                 * Return response true
+                 */
+                return $this->response->setJSON([
+                    'success' => $success,
+                    'message' => $message,
+                ]);
+            } elseif ($success == false) {
+                /**
+                 * Return response false
+                 */
+                return $this->response->setJSON([
+                    'success' => $success,
+                    'message' => $message,
+                ]);
+            }
     }
 }

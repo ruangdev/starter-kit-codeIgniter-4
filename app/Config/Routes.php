@@ -76,4 +76,5 @@ $routes->group('/cms/v1', ['filter' => 'login'], function($routes) {
     $routes->post('store-module','Authorization\ModuleController::store',['as' => 'admin.module.store']);
     $routes->get('edit-module/(:segment)','Authorization\ModuleController::edit/$1',['as' => 'admin.module.edit']);
     $routes->put('update-module/(:segment)','Authorization\ModuleController::update/$1',['as' => 'admin.module.update']);
+    $routes->delete('delete-module/(:segment)','Authorization\ModuleController::delete/$1',['as' => 'admin.module.delete']);
 });

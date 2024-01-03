@@ -44,4 +44,10 @@ class ModuleResponse implements ModuleDesign {
             'module_name' =>$param['module_name']
         ]);
     }
+
+    public function delete($id)
+    {
+        $result = $this->Module->whereId($id);
+        return $result->delete();
+    }
 }
