@@ -8,6 +8,7 @@ use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Repository\Module\ModuleResponse;
 use App\Validation\Module\StoreValidation;
+use App\Validation\Module\UpdateValidation;
 
 class ModuleController extends BaseController
 {
@@ -85,7 +86,14 @@ class ModuleController extends BaseController
 
     public function update($id)
     {
-        // try {
+        $validationRules    = UpdateValidation::rules($id);
+        $validationMessages = UpdateValidation::messages();
+        $validation         = Services::validation();
+        if (!$this->validate($validationRules, $validationMessages)) {
+            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
+        }
+        
+        try {
             $param  = $this->request->getRawInput();
             $result = $this->ModuleResponse->update($param, $id);
             $notification = [
@@ -95,14 +103,14 @@ class ModuleController extends BaseController
                 'position'    => 'right'
             ]; 
                 return redirect()->to(route_to('admin.module.list'))->with('message', $notification);
-        // } catch (\Throwable $th) {
-        //     $notification = [
-        //         'message'     => 'Failed to updated Module.',
-        //         'alert-type'  => 'danger',
-        //         'gravity'     => 'bottom',
-        //         'position'    => 'right'
-        //     ];   
-        //         return redirect()->to(route_to('admin.module.list'))->with('message', $notification);
-        // }
+        } catch (\Throwable $th) {
+            $notification = [
+                'message'     => 'Failed to updated Module.',
+                'alert-type'  => 'danger',
+                'gravity'     => 'bottom',
+                'position'    => 'right'
+            ];   
+                return redirect()->to(route_to('admin.module.list'))->with('message', $notification);
+        }
     }
 }
