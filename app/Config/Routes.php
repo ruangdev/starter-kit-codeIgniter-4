@@ -30,7 +30,6 @@ $routes->get('/', 'Home::index',['as' => 'home.site', 'filter' => 'login']);
  * Route Admin
  */
 $routes->group('/cms/v1', ['filter' => 'login'], function($routes) {
-
     /**
      * Route Error Page
      */
@@ -77,4 +76,11 @@ $routes->group('/cms/v1', ['filter' => 'login'], function($routes) {
     $routes->get('edit-module/(:segment)','Authorization\ModuleController::edit/$1',['as' => 'admin.module.edit']);
     $routes->put('update-module/(:segment)','Authorization\ModuleController::update/$1',['as' => 'admin.module.update']);
     $routes->delete('delete-module/(:segment)','Authorization\ModuleController::delete/$1',['as' => 'admin.module.delete']);
+});
+
+/**
+ * Route API
+ */
+$routes->group('/api/v1', function($routes) {
+    $routes->post('login','API\AuthController::login',['as' => 'api.login']);
 });

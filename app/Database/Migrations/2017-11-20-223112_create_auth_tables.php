@@ -91,6 +91,7 @@ class CreateAuthTables extends Migration
         // Groups Table
         $fields = [
             'id'          => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
+            'uuid'        => ['type' => 'CHAR', 'constraint' => 36],
             'name'        => ['type' => 'varchar', 'constraint' => 255],
             'description' => ['type' => 'varchar', 'constraint' => 255],
         ];

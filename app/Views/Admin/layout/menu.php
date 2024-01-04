@@ -43,7 +43,7 @@
                 <?php endif; ?>
 
                 <li class="submenu-item">
-                    <a href="<?= route_to('admin.role.create') ?>">
+                    <a href="<?= route_to('admin.role.list') ?>">
                         Data Role
                     </a>
                 </li>

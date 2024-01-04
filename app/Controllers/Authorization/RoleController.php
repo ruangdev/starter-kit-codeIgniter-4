@@ -2,6 +2,8 @@
 
 namespace App\Controllers\Authorization;
 
+use Config\Services;
+
 use App\Controllers\BaseController;
 
 class RoleController extends BaseController
@@ -14,7 +16,8 @@ class RoleController extends BaseController
 
     public function index()
     {
-        
+        $auth = Services::auth();
+        // return view('Admin/Authorization/Role/index');
     }
 
     public function create()
