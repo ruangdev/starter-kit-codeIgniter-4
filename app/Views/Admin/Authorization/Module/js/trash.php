@@ -33,13 +33,13 @@
                             title: data.success === true ? 'Berhasil' : 'Faild',
                             text: data.message,
                             icon: data.success === true ? 'success' : 'error',
-                            timer: 20000,
+                            timer: 2000,
                             timerProgressBar: true,
                             showConfirmButton: false
                         });
                         setInterval(function() {
                             window.location.reload();
-                        }, 20000);
+                        }, 2000);
                         table.draw();
                     }
                 });
