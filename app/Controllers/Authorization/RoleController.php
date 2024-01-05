@@ -39,7 +39,7 @@ class RoleController extends BaseController
 
     public function create()
     {
-
+        return view('Admin/Authorization/Role/create');
     }
 
     public function store()

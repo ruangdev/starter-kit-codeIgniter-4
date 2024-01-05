@@ -10,7 +10,7 @@
 <div class="page-title">
     <div class="row">
         <div class="col-12 col-md-4 order-md-1 order-last">
-            <a href="" class="btn btn-primary">
+            <a href="<?= route_to('admin.role.create') ?>" class="btn btn-primary">
                 <i class="fas fa-folder-plus"></i>
                 Create
             </a>
