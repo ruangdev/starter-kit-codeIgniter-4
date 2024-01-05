@@ -3,21 +3,38 @@
 namespace App\Controllers\Authorization;
 
 use Config\Services;
-
+use \Hermawan\DataTables\DataTable;
 use App\Controllers\BaseController;
+use App\Repository\Role\RoleResponse;
 
 class RoleController extends BaseController
 {
-    protected $authorize;
+    protected $RoleResponse;
     public function __construct()
     {
-        $this->authorize = service('authorization');
+        $this->RoleResponse = new RoleResponse;
     }
 
     public function index()
     {
-        $auth = Services::auth();
-        // return view('Admin/Authorization/Role/index');
+        if($this->request->isAJAX()) {
+            $result = $this->RoleResponse->datatable();
+            
+            return DataTable::of($result)->addNumbering('no')
+                ->add('action', function($action){
+                    return  '
+                                <a href="" type="button" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <button type="button" class="btn btn-danger btn-sm delete-btn")
+                                        data-uuid="">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            ';
+                })
+            ->toJson(true);
+        }
+            return view('Admin/Authorization/Role/index');
     }
 
     public function create()

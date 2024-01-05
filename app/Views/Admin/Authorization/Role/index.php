@@ -44,9 +44,8 @@
                 <thead class="table-dark">
                     <tr>
                         <th class="text-left" width="10px">No.</th>
-                        <th class="text-left" width="100px">Permission Name</th>
-                        <th class="text-left" width="100px">Module Name</th>
-                        <th class="text-left" width="100px">Permission Description</th>
+                        <th class="text-left" width="100px">Role Name</th>
+                        <th class="text-left" width="100px">Role Description</th>
                         <th class="text-left" width="100px">Created Date</th>
                         <th class="text-left" width="50px">Action</th>
                     </tr>
@@ -63,6 +62,7 @@
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.23/datatables.min.js"></script>
 <script src="<?= base_url('assets/cms/js/sweetalert/sweetalert.js') ?>"></script>
 
+<?= $this->include('Admin/Authorization/Role/datatable/index'); ?>
 <?= $this->endSection(); ?>
 
 <?= $this->section('jscustom') ?>
