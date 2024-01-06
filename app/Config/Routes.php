@@ -56,6 +56,7 @@ $routes->group('/cms/v1', ['filter' => 'login'], function($routes) {
      */
     $routes->get('list-role','Authorization\RoleController::index',['as' => 'admin.role.list']);
     $routes->get('create-role','Authorization\RoleController::create',['as' => 'admin.role.create']);
+    $routes->post('store-role','Authorization\RoleController::store',['as' => 'admin.role.store']);
 
     /**
      * Route Permission

@@ -6,6 +6,7 @@ use Config\Services;
 use \Hermawan\DataTables\DataTable;
 use App\Controllers\BaseController;
 use App\Repository\Role\RoleResponse;
+use App\Validation\Role\StoreValidation;
 
 class RoleController extends BaseController
 {
@@ -44,20 +45,47 @@ class RoleController extends BaseController
 
     public function store()
     {
-        $cache = \Config\Services::cache();
-        $cache->clean();
+        // $cache = \Config\Services::cache();
+        // $cache->clean();
 
         // dd(has_permission('show.users'));
         // $permission = $this->authorize->permission('show.users');
 
         // dd($permission);
 
-        $group_id       = 1;
-        $permission_id  = [1 ,2, 3];
+        // $group_id       = 1;
+        // $permission_id  = [1 ,2, 3];
 
-        for ($i=0; $i < count($permission_id); $i++) {
+        // for ($i=0; $i < count($permission_id); $i++) {
             // $this->authorize->addPermissionToGroup($permission_id[$i], $group_id);
-            $this->authorize->removePermissionFromGroup($permission_id[$i], $group_id);
+            // $this->authorize->removePermissionFromGroup($permission_id[$i], $group_id);
+        // }
+
+        $validationRules    = StoreValidation::rules();
+        $validationMessages = StoreValidation::messages();
+        $validation         = Services::validation();
+        if (!$this->validate($validationRules, $validationMessages)) {
+            return redirect()->to(route_to('admin.role.create'))->withInput()->with('errors', $validation->getErrors());
+        }
+        
+        try {
+            $param = $this->request->getRawInput();
+            $this->RoleResponse->store($param);
+            $notification = [
+                'message'     => 'Successfully created Role.',
+                'alert-type'  => 'success',
+                'gravity'     => 'bottom',
+                'position'    => 'right'
+            ]; 
+                return redirect()->to(route_to('admin.role.list'))->with('message', $notification);
+        } catch (\Throwable $th) {
+            $notification = [
+                'message'     => 'Failed to created Role.',
+                'alert-type'  => 'danger',
+                'gravity'     => 'bottom',
+                'position'    => 'right'
+            ];   
+                return redirect()->to(route_to('admin.role.list'))->with('message', $notification);
         }
     }
 }

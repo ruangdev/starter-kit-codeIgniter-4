@@ -27,6 +27,10 @@ class RoleResponse implements RoleDesign {
 
     public function store($param)
     {
-        # code...
+        $this->Role->create([
+            'uuid'          =>$this->uuid,
+            'name'          =>$param["role_name"],
+            'description'   =>$param["role_description"],
+        ]);
     }
 }
