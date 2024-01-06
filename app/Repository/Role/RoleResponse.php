@@ -33,4 +33,17 @@ class RoleResponse implements RoleDesign {
             'description'   =>$param["role_description"],
         ]);
     }
+
+    public function find($id)
+    {
+        return $this->Role->whereUuid($id)->first();
+    }
+
+    public function update($param, $id)
+    {
+        $this->Role->whereUuid($id)->update([
+            'name'          =>$param["role_name"],
+            'description'   =>$param["role_description"],
+        ]);
+    }
 }

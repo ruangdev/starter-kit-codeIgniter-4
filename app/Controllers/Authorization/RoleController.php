@@ -7,6 +7,7 @@ use \Hermawan\DataTables\DataTable;
 use App\Controllers\BaseController;
 use App\Repository\Role\RoleResponse;
 use App\Validation\Role\StoreValidation;
+use App\Validation\Role\UpdateValidation;
 
 class RoleController extends BaseController
 {
@@ -24,7 +25,7 @@ class RoleController extends BaseController
             return DataTable::of($result)->addNumbering('no')
                 ->add('action', function($action){
                     return  '
-                                <a href="" type="button" class="btn btn-primary btn-sm">
+                                <a href="'.route_to('admin.role.edit', $action->uuid).'" type="button" class="btn btn-primary btn-sm">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <button type="button" class="btn btn-danger btn-sm delete-btn")
@@ -81,6 +82,46 @@ class RoleController extends BaseController
         } catch (\Throwable $th) {
             $notification = [
                 'message'     => 'Failed to created Role.',
+                'alert-type'  => 'danger',
+                'gravity'     => 'bottom',
+                'position'    => 'right'
+            ];   
+                return redirect()->to(route_to('admin.role.list'))->with('message', $notification);
+        }
+    }
+
+    public function edit($id)
+    {
+        $result = $this->RoleResponse->find($id);
+        if(empty($result)) {
+            return view('Admin/layout/errors/404');
+        } else {
+            return view('Admin/Authorization/Role/edit',compact('result'));
+        }
+    }
+
+    public function update($id)
+    {
+        $validationRules    = UpdateValidation::rules($id);
+        $validationMessages = UpdateValidation::messages();
+        $validation         = Services::validation();
+        if (!$this->validate($validationRules, $validationMessages)) {
+            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
+        }
+        
+        try {
+            $param  = $this->request->getRawInput();
+            $result = $this->RoleResponse->update($param, $id);
+            $notification = [
+                'message'     => 'Successfully Updated Role.',
+                'alert-type'  => 'success',
+                'gravity'     => 'bottom',
+                'position'    => 'right'
+            ]; 
+                return redirect()->to(route_to('admin.role.list'))->with('message', $notification);
+        } catch (\Throwable $th) {
+            $notification = [
+                'message'     => 'Failed to Update Role.',
                 'alert-type'  => 'danger',
                 'gravity'     => 'bottom',
                 'position'    => 'right'
