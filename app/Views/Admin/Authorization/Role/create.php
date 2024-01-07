@@ -56,16 +56,52 @@
                     <div class="col-md-6 col-12">
                         <div class="form-group">
                             <label for="role_name">Role Name</label>
-                            <input type="text" id="role_name" class="form-control" placeholder="Role Name..." value="<?= old('role_name'); ?>"
-                                    name="role_name" autofocus>
+                            <input type="text" id="role_name" class="form-control" placeholder="Role Name..." value="<?= old('role_name'); ?>" name="role_name" autofocus>
                         </div>
                     </div>
 
                     <div class="col-md-8 col-12">
                         <div class="form-group">
                             <label for="role_description">Role Description</label>
-                            <textarea type="text" id="role_description" class="form-control" placeholder="Role Description..."
-                                    name="role_description"><?= old('role_description'); ?></textarea>
+                            <textarea type="text" id="role_description" class="form-control" placeholder="Role Description..." name="role_description"><?= old('role_description'); ?></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 col-12">
+                        <div class="form-group">
+                            <label for="permissions[]">
+                                List Permission
+                            </label>
+                            <div class="row">
+                                <?php foreach ($authorities as $authoritie) : ?>
+                                    <div class="col-md-4 col-12">
+                                        <div class="form-group">
+                                            <ul class="list-group me-1 mb-1">
+                                                <li class="list-group-item text-black">
+                                                    <?= esc($authoritie->module_name); ?>
+                                                </li>
+
+                                                <?php foreach ($authoritie->permissions as $permission) : ?>
+                                                    <li class="list-group-item">
+                                                        <div class="form-check form-switch">
+                                                            <input id="permissions" name="permissions[]" class="form-check-input <?= isset($errors['permissions']) ? 'is-invalid' : ''; ?>" type="checkbox" value="<?= esc($permission->id); ?>" <?= in_array($permission->id, old('permissions') ?? []) ? 'checked' : ''; ?>>
+                                                            <label class="form-check-label" for="<?= esc($permission->name); ?>">
+                                                                <?= esc($permission->name); ?>
+                                                            </label>
+
+                                                            <?php if (isset($errors['permissions'])) : ?>
+                                                                <div class="invalid-feedback">
+                                                                    <?= esc($errors['permissions']); ?>
+                                                                </div>
+                                                            <?php endif; ?>
+                                                        </div>
+                                                    </li>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
                         </div>
                     </div>
                 </div>

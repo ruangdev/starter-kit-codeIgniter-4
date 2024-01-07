@@ -3,21 +3,26 @@
 namespace App\Repository\Role;
 
 use Config\Database;
+use Config\Services;
 use App\Helpers\UUID;
 use App\Models\Authorization\Role;
 use App\Repository\Role\RoleDesign;
+use App\Models\Authorization\Module;
 
 class RoleResponse implements RoleDesign {
 
     protected $db;
     protected $Role;
+    protected $Module;
     protected $uuid;
 
     public function __construct()
     {
-        $this->db   = Database::connect();
-        $this->Role = new Role();
-        $this->uuid = UUID::create();
+        $this->db           = Database::connect();
+        $this->Role         = new Role();
+        $this->Module       = new Module();
+        $this->authorize    = service('authorization');
+        $this->uuid         = UUID::create();
     }
 
     public function datatable()
@@ -27,11 +32,17 @@ class RoleResponse implements RoleDesign {
 
     public function store($param)
     {
-        $this->Role->create([
+        $cache = Services::cache();
+        $cache->clean();
+
+        $result = $this->Role->create([
             'uuid'          =>$this->uuid,
             'name'          =>$param["role_name"],
             'description'   =>$param["role_description"],
         ]);
+            for ($i=0; $i < count($param["permissions"]); $i++) {
+                $this->authorize->addPermissionToGroup($param["permissions"][$i], $result->id);
+            }
     }
 
     public function find($id)
@@ -51,5 +62,12 @@ class RoleResponse implements RoleDesign {
     {
         $result = $this->Role->whereUuid($id);
         return $result->delete();
+    }
+
+    public function permission()
+    {
+       return $this->Module->with('permissions')
+                          ->orderby('module_name','asc')
+                          ->get();
     }
 }

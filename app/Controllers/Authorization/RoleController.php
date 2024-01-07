@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Authorization;
 
+use Config\Database;
 use Config\Services;
 use \Hermawan\DataTables\DataTable;
 use App\Controllers\BaseController;
@@ -14,6 +15,7 @@ class RoleController extends BaseController
     protected $RoleResponse;
     public function __construct()
     {
+        $this->db           = Database::connect();
         $this->RoleResponse = new RoleResponse;
     }
 
@@ -44,26 +46,15 @@ class RoleController extends BaseController
 
     public function create()
     {
-        return view('Admin/Authorization/Role/create');
+        $authorities = $this->RoleResponse->permission();
+            return view('Admin/Authorization/Role/create',compact('authorities'));
     }
 
     public function store()
     {
-        // $cache = \Config\Services::cache();
-        // $cache->clean();
-
         // dd(has_permission('show.users'));
         // $permission = $this->authorize->permission('show.users');
-
-        // dd($permission);
-
-        // $group_id       = 1;
-        // $permission_id  = [1 ,2, 3];
-
-        // for ($i=0; $i < count($permission_id); $i++) {
-            // $this->authorize->addPermissionToGroup($permission_id[$i], $group_id);
-            // $this->authorize->removePermissionFromGroup($permission_id[$i], $group_id);
-        // }
+        // $this->authorize->removePermissionFromGroup($permission_id[$i], $group_id);
 
         $validationRules    = StoreValidation::rules();
         $validationMessages = StoreValidation::messages();
@@ -72,6 +63,7 @@ class RoleController extends BaseController
             return redirect()->to(route_to('admin.role.create'))->withInput()->with('errors', $validation->getErrors());
         }
         
+        $this->db->transBegin();
         try {
             $param = $this->request->getRawInput();
             $this->RoleResponse->store($param);
@@ -83,6 +75,7 @@ class RoleController extends BaseController
             ]; 
                 return redirect()->to(route_to('admin.role.list'))->with('message', $notification);
         } catch (\Throwable $th) {
+            $this->db->transRollback();
             $notification = [
                 'message'     => 'Failed to created Role.',
                 'alert-type'  => 'danger',
@@ -90,6 +83,8 @@ class RoleController extends BaseController
                 'position'    => 'right'
             ];   
                 return redirect()->to(route_to('admin.role.list'))->with('message', $notification);
+        } finally {
+            $this->db->transCommit();
         }
     }
 
