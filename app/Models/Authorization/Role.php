@@ -3,6 +3,7 @@
 namespace App\Models\Authorization;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Authorization\Permission;
 
 class Role extends Model
 {
@@ -19,4 +20,9 @@ class Role extends Model
         'name',
         'description',
     ];
+
+    public function permissions()
+    {
+        return $this->hasMany(Permission::class,'id_auth_module','id');
+    }
 }

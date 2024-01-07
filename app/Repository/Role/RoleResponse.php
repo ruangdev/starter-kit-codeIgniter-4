@@ -6,6 +6,7 @@ use Config\Database;
 use Config\Services;
 use App\Helpers\UUID;
 use App\Models\Authorization\Role;
+use Illuminate\Support\Facades\DB;
 use App\Repository\Role\RoleDesign;
 use App\Models\Authorization\Module;
 
@@ -48,6 +49,16 @@ class RoleResponse implements RoleDesign {
     public function find($id)
     {
         return $this->Role->whereUuid($id)->first();
+    }
+
+    public function findPermission($id)
+    {
+        // return $this->db->table('auth_groups_permissions')->select('*')->where('group_id', $id)->get()->getResult();
+
+        return $this->db->table('auth_groups_permissions')->select('auth_groups_permissions.*, auth_permissions.name')
+                ->join('auth_permissions', 'auth_permissions.id = auth_groups_permissions.permission_id')
+                ->where('auth_groups_permissions.group_id', $id)
+                ->get()->getResult();
     }
 
     public function update($param, $id)

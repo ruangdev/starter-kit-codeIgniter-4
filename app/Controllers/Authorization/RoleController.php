@@ -90,11 +90,18 @@ class RoleController extends BaseController
 
     public function edit($id)
     {
-        $result = $this->RoleResponse->find($id);
+        $result         = $this->RoleResponse->find($id);
+        $findPermission = $this->RoleResponse->findPermission($result->id);
+        $authorities    = $this->RoleResponse->permission();
+
+        // return $this->response->setJSON([
+        //     'data' => $findPermission,
+        // ]);
+
         if(empty($result)) {
             return view('Admin/layout/errors/404');
         } else {
-            return view('Admin/Authorization/Role/edit',compact('result'));
+            return view('Admin/Authorization/Role/edit',compact('result','authorities','findPermission'));
         }
     }
 
@@ -107,6 +114,7 @@ class RoleController extends BaseController
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
         
+        $this->db->transBegin();
         try {
             $param  = $this->request->getRawInput();
             $result = $this->RoleResponse->update($param, $id);
@@ -118,6 +126,7 @@ class RoleController extends BaseController
             ]; 
                 return redirect()->to(route_to('admin.role.list'))->with('message', $notification);
         } catch (\Throwable $th) {
+            $this->db->transRollback();
             $notification = [
                 'message'     => 'Failed to Update Role.',
                 'alert-type'  => 'danger',
@@ -125,6 +134,8 @@ class RoleController extends BaseController
                 'position'    => 'right'
             ];   
                 return redirect()->to(route_to('admin.role.list'))->with('message', $notification);
+        } finally {
+            $this->db->transCommit();
         }
     }
 

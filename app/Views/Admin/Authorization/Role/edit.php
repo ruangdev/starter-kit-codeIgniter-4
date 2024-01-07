@@ -37,7 +37,7 @@
 <section class="section">
     <div class="card">
         <div class="card-body">
-            <form class="form" action="<?= route_to('admin.role.update',$result->uuid) ?>" method="POST">
+            <form class="form" action="<?= route_to('admin.role.update', $result->uuid) ?>" method="POST">
                 <?= csrf_field() ?>
                 <input type="hidden" name="_method" value="PUT">
 
@@ -57,16 +57,49 @@
                     <div class="col-md-6 col-12">
                         <div class="form-group">
                             <label for="role_name">Role Name</label>
-                            <input type="text" id="role_name" class="form-control" placeholder="Role Name..." value="<?= old('role_name',$result->name); ?>"
-                                    name="role_name" autofocus>
+                            <input type="text" id="role_name" class="form-control" placeholder="Role Name..." value="<?= old('role_name', $result->name); ?>" name="role_name" autofocus>
                         </div>
                     </div>
 
                     <div class="col-md-8 col-12">
                         <div class="form-group">
                             <label for="role_description">Role Description</label>
-                            <textarea type="text" id="role_description" class="form-control" placeholder="Role Description..."
-                                    name="role_description"><?= old('role_description',$result->description); ?></textarea>
+                            <textarea type="text" id="role_description" class="form-control" placeholder="Role Description..." name="role_description"><?= old('role_description', $result->description); ?></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 col-12">
+                        <div class="form-group">
+                            <label for="permissions[]">List Permission</label>
+                            <div class="row">
+                                <?php foreach ($authorities as $authority) : ?>
+                                    <div class="col-md-4 col-12">
+                                        <div class="form-group">
+                                            <ul class="list-group ml-1 mb-2">
+                                                <li class="list-group-item text-black">
+                                                    <?= esc($authority->module_name) ?>
+                                                </li>
+                                                <?php foreach ($authority->permissions as $permission) : ?>
+                                                    <li class="list-group-item">
+                                                        <div class="form-check form-switch">
+                                                            <?php
+                                                            $isChecked = false;
+                                                            if (isset($findPermission) && is_array($findPermission) && in_array($permission->id, array_column($findPermission, 'permission_id'))) {
+                                                                $isChecked = true;
+                                                            }
+                                                            ?>
+                                                            <input id="permission_<?= esc($permission->id) ?>" name="permissions[]" class="form-check-input <?= isset($errors['permissions']) ? 'is-invalid' : '' ?>" type="checkbox" value="<?= esc($permission->id) ?>" <?= (is_array(old('permissions')) && in_array($permission->id, old('permissions'))) || $isChecked ? 'checked' : '' ?>>
+                                                            <label class="form-check-label" for="permission_<?= esc($permission->id) ?>">
+                                                                <?= esc($permission->name) ?>
+                                                            </label>
+                                                        </div>
+                                                    </li>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
                         </div>
                     </div>
                 </div>
