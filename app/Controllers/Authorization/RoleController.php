@@ -93,11 +93,6 @@ class RoleController extends BaseController
         $result         = $this->RoleResponse->find($id);
         $findPermission = $this->RoleResponse->findPermission($result->id);
         $authorities    = $this->RoleResponse->permission();
-
-        // return $this->response->setJSON([
-        //     'data' => $findPermission,
-        // ]);
-
         if(empty($result)) {
             return view('Admin/layout/errors/404');
         } else {
@@ -170,11 +165,13 @@ class RoleController extends BaseController
 
     public function view($id)
     {
-        $result = $this->RoleResponse->find($id);
+        $result         = $this->RoleResponse->find($id);
+        $findPermission = $this->RoleResponse->findPermission($result->id);
+        $authorities    = $this->RoleResponse->permission();
         if(empty($result)) {
             return view('Admin/layout/errors/404');
         } else {
-            return view('Admin/Authorization/Role/view',compact('result'));
+            return view('Admin/Authorization/Role/view',compact('result','findPermission','authorities'));
         }
     }
 }
