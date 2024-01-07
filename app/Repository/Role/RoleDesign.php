@@ -7,4 +7,5 @@ interface RoleDesign {
     public function store($param);
     public function find($id);
     public function update($param, $id);
+    public function delete($id);
 }

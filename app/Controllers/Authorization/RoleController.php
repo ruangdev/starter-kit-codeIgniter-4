@@ -29,7 +29,7 @@ class RoleController extends BaseController
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <button type="button" class="btn btn-danger btn-sm delete-btn")
-                                        data-uuid="">
+                                        data-uuid="'.$action->uuid.'">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
                             ';
@@ -128,5 +128,34 @@ class RoleController extends BaseController
             ];   
                 return redirect()->to(route_to('admin.role.list'))->with('message', $notification);
         }
+    }
+
+    public function delete($id)
+    {
+        try {
+            $this->RoleResponse->delete($id);
+            $success = true;
+            $message = "Successfully to Delete Data Role.";
+        } catch (\Throwable $th) {
+            $success = false;
+            $message = "Failed to Delete data Role.";
+        }
+            if($success == true) {
+                /**
+                 * Return response true
+                 */
+                return $this->response->setJSON([
+                    'success' => $success,
+                    'message' => $message,
+                ]);
+            } elseif ($success == false) {
+                /**
+                 * Return response false
+                 */
+                return $this->response->setJSON([
+                    'success' => $success,
+                    'message' => $message,
+                ]);
+            }
     }
 }

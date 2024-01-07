@@ -59,6 +59,7 @@ $routes->group('/cms/v1', ['filter' => 'login'], function($routes) {
     $routes->post('store-role','Authorization\RoleController::store',['as' => 'admin.role.store']);
     $routes->get('edit-role/(:segment)','Authorization\RoleController::edit/$1',['as' => 'admin.role.edit']);
     $routes->put('update-role/(:segment)','Authorization\RoleController::update/$1',['as' => 'admin.role.update']);
+    $routes->delete('delete-role/(:segment)','Authorization\RoleController::delete/$1',['as' => 'admin.role.delete']);
 
     /**
      * Route Permission

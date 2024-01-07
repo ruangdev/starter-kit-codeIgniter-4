@@ -45,7 +45,7 @@
                     <tr>
                         <th class="text-left" width="10px">No.</th>
                         <th class="text-left" width="100px">Role Name</th>
-                        <th class="text-left" width="100px">Role Description</th>
+                        <th class="text-left" width="200px">Role Description</th>
                         <th class="text-left" width="100px">Created Date</th>
                         <th class="text-left" width="50px">Action</th>
                     </tr>
@@ -63,6 +63,7 @@
 <script src="<?= base_url('assets/cms/js/sweetalert/sweetalert.js') ?>"></script>
 
 <?= $this->include('Admin/Authorization/Role/datatable/index'); ?>
+<?= $this->include('Admin/Authorization/Role/js/trash'); ?>
 <?= $this->endSection(); ?>
 
 <?= $this->section('jscustom') ?>

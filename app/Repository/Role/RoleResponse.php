@@ -46,4 +46,10 @@ class RoleResponse implements RoleDesign {
             'description'   =>$param["role_description"],
         ]);
     }
+
+    public function delete($id)
+    {
+        $result = $this->Role->whereUuid($id);
+        return $result->delete();
+    }
 }
