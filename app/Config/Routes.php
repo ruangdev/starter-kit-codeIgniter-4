@@ -60,6 +60,7 @@ $routes->group('/cms/v1', ['filter' => 'login'], function($routes) {
     $routes->get('edit-role/(:segment)','Authorization\RoleController::edit/$1',['as' => 'admin.role.edit']);
     $routes->put('update-role/(:segment)','Authorization\RoleController::update/$1',['as' => 'admin.role.update']);
     $routes->delete('delete-role/(:segment)','Authorization\RoleController::delete/$1',['as' => 'admin.role.delete']);
+    $routes->get('view-role/(:segment)','Authorization\RoleController::view/$1',['as' => 'admin.role.view']);
 
     /**
      * Route Permission

@@ -32,6 +32,9 @@ class RoleController extends BaseController
                                         data-uuid="'.$action->uuid.'">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
+                                <a href="'.route_to('admin.role.view', $action->uuid).'" type="button" class="btn btn-success btn-sm">
+                                    <i class="fas fa-folder-open"></i>
+                                </a>
                             ';
                 })
             ->toJson(true);
@@ -157,5 +160,15 @@ class RoleController extends BaseController
                     'message' => $message,
                 ]);
             }
+    }
+
+    public function view($id)
+    {
+        $result = $this->RoleResponse->find($id);
+        if(empty($result)) {
+            return view('Admin/layout/errors/404');
+        } else {
+            return view('Admin/Authorization/Role/view',compact('result'));
+        }
     }
 }
