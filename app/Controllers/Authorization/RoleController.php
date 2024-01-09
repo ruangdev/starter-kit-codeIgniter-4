@@ -52,9 +52,8 @@ class RoleController extends BaseController
 
     public function store()
     {
-        // dd(has_permission('show.users'));
+        // $permission = has_permission('show.users');
         // $permission = $this->authorize->permission('show.users');
-        // $this->authorize->removePermissionFromGroup($permission_id[$i], $group_id);
 
         $validationRules    = StoreValidation::rules();
         $validationMessages = StoreValidation::messages();
@@ -109,10 +108,10 @@ class RoleController extends BaseController
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
         
-        $this->db->transBegin();
-        try {
             $param  = $this->request->getRawInput();
-            $result = $this->RoleResponse->update($param, $id);
+            $result         = $this->RoleResponse->find($id);
+            $findPermission = $this->RoleResponse->findPermission($result->id);
+            $result         = $this->RoleResponse->update($param, $findPermission, $result->id, $id);
             $notification = [
                 'message'     => 'Successfully Updated Role.',
                 'alert-type'  => 'success',
@@ -120,18 +119,6 @@ class RoleController extends BaseController
                 'position'    => 'right'
             ]; 
                 return redirect()->to(route_to('admin.role.list'))->with('message', $notification);
-        } catch (\Throwable $th) {
-            $this->db->transRollback();
-            $notification = [
-                'message'     => 'Failed to Update Role.',
-                'alert-type'  => 'danger',
-                'gravity'     => 'bottom',
-                'position'    => 'right'
-            ];   
-                return redirect()->to(route_to('admin.role.list'))->with('message', $notification);
-        } finally {
-            $this->db->transCommit();
-        }
     }
 
     public function delete($id)
